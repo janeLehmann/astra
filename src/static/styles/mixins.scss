@@ -1,0 +1,43 @@
+// Fonts
+@mixin regular() {
+  font-family: 'Circe-Regular', sans-serif;
+}
+
+@mixin bold() {
+  font-family: 'Circe-Bold', sans-serif;
+}
+
+//@mixin extra-bold() {
+//  font-family: 'Circe-ExtraBold', sans-serif;
+//}
+
+@mixin rubik-regular() {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+}
+
+@mixin rubik-medium() {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+}
+
+@mixin reset-button-styles() {
+  border: none;
+  border-radius: 0;
+  background: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin container() {
+  max-width: 1080px + 48px;
+  padding-left: 24px;
+  padding-right: 24px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}

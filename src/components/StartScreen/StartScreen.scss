@@ -1,0 +1,50 @@
+.start-screen {
+  background: #212121;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background .3s ease-in-out;
+
+  &_light {
+    background: white;
+  }
+
+  &__logo {
+    margin-bottom: 100px;
+    width: 410px;
+
+    path {
+      transition: fill .3s ease-in-out;
+
+      .start-screen_light & {
+        fill: #212121;
+      }
+    }
+  }
+
+  &__content {
+    min-height: 25px;
+  }
+
+  &__text {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    display: flex;
+    font-size: 25px;
+    transition: color .3s ease-in-out;
+
+    .start-screen_light & {
+      color: #212121;
+    }
+  }
+
+  &__cursor {
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+  }
+}
