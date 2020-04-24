@@ -1,24 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap');
+
 // Fonts
 @mixin regular() {
-  font-family: 'Circe-Regular', sans-serif;
-}
-
-@mixin bold() {
-  font-family: 'Circe-Bold', sans-serif;
-}
-
-//@mixin extra-bold() {
-//  font-family: 'Circe-ExtraBold', sans-serif;
-//}
-
-@mixin rubik-regular() {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
 }
 
-@mixin rubik-medium() {
-  font-family: 'Rubik', sans-serif;
-  font-weight: 500;
+@mixin medium() {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+@mixin bold() {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
 }
 
 @mixin reset-button-styles() {

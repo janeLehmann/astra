@@ -1,0 +1,149 @@
+@import 'src/static/styles/mixins';
+
+.contacts {
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+
+  &__inner {
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+  }
+
+  &__map {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 50px 20px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 500px 600px 0 0;
+      border-color: #ffffff transparent transparent transparent;
+      z-index: 10;
+    }
+  }
+
+  &__title {
+    position: relative;
+    z-index: 20;
+    font-size: 25px;
+    @include medium();
+    margin-bottom: 50px;
+    color: var(--black);
+  }
+
+  &__main {
+    max-width: 70%;
+  }
+
+  &__address {
+    position: relative;
+    z-index: 20;
+    font-size: 16px;
+    @include regular();
+    margin-bottom: 15px;
+    color: var(--black);
+    line-height: 1.4;
+  }
+
+  &__phone {
+    position: relative;
+    z-index: 20;
+    font-size: 16px;
+    @include regular();
+    margin-bottom: 15px;
+    color: var(--black);
+  }
+
+  &__phone-itself {
+    font-size: 16px;
+    @include regular();
+    color: var(--black);
+    text-decoration: none;
+    margin-left: 5px;
+
+    a {
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .contacts {
+
+    &__info {
+
+      &:after {
+        border-width: 500px 500px 0 0;
+      }
+    }
+
+    &__title {
+      font-size: 22px;
+      margin-bottom: 25px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .contacts {
+
+    &__info {
+
+      &:after {
+        border-width: 400px 600px 0 0;
+      }
+    }
+
+    &__main {
+      max-width: 60%;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .contacts {
+
+    &__info {
+      padding: 20px;
+      border-top: 3px solid var(--black);
+
+      &:after {
+        border-width: 0;
+        width: 100%;
+        height: 200px;
+        background: white;
+      }
+    }
+
+    &__main {
+      max-width: 100%;
+    }
+  }
+}

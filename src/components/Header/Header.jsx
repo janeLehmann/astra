@@ -6,7 +6,7 @@ import IconWand from '../../static/assets/magic-wand.svg';
 
 import './Header.scss';
 
-const Header = ({ setMagic, magic }) => {
+const Header = ({ setMagic, magic, setIsMenuOpen }) => {
   return (
     <div
       className={cx('header', {
@@ -20,7 +20,7 @@ const Header = ({ setMagic, magic }) => {
           </button>
         </div>
 
-        <button className="header__burger">
+        <button className="header__burger" type="button" onClick={setIsMenuOpen}>
           <span className="header__burger-span" />
           <span className="header__burger-span" />
           <span className="header__burger-span" />
@@ -32,6 +32,7 @@ const Header = ({ setMagic, magic }) => {
 
 Header.propTypes = {
   setMagic: PropTypes.func.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
   magic: PropTypes.bool.isRequired,
 };
 

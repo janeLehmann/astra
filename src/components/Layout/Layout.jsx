@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <main>{children}</main>
+      <main className="layout">{children}</main>
     </>
   );
 };

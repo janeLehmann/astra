@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Layout from '../components/Layout/Layout';
-import StartScreen from '../components/StartScreen/StartScreen';
+import Contacts from '../components/Contacts/Contacts';
 import SEO from '../components/seo';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
@@ -18,13 +18,14 @@ const IndexPage = () => {
         setMagic={() => {
           setMagic(prevState => !prevState);
         }}
-        magic={magic}
+        magic
         setIsMenuOpen={() => {
           setIsMenuOpen(true);
         }}
       />
-      <StartScreen magic={magic} />
-      <Footer magic={magic} />
+      <Contacts magic={magic} />
+
+      <Footer magic />
       {isMenuOpen && (
         <Menu
           closeMenu={() => {
