@@ -1,0 +1,46 @@
+@import 'src/static/styles/mixins';
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+
+  &__item {
+    @include reset-button-styles();
+    margin-right: 15px;
+    text-transform: uppercase;
+    @include medium();
+    position: relative;
+    z-index: 20;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__bar-wrap {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 26px;
+    bottom: 0;
+    z-index: 10;
+  }
+
+  &__bar {
+    height: 2px;
+    background: var(--black);
+    transition: all 0.3s ease;
+    position: absolute;
+
+    &_top {
+      top: 0;
+    }
+
+    &_bottom {
+      bottom: 0;
+    }
+  }
+}
