@@ -23,7 +23,8 @@ export const query = graphql`
       nodes {
         acf {
           square
-          text
+          city
+          address
           time
         }
         categories {
@@ -39,6 +40,7 @@ export const query = graphql`
         }
         id
         title
+        slug
       }
     }
   }

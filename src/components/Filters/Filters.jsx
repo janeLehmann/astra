@@ -2,9 +2,13 @@ import React, {useMemo, useEffect, useState, createRef} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+// Helpers
+import { useWindowSize } from '../../helpers';
+
 import './Filters.scss';
 
 const Filters = ({ filters, className, currentTabId }) => {
+  const windowSize = useWindowSize();
 
   /**
    * Создаем массив из рефов для каждого из айтемов массива,
@@ -32,15 +36,19 @@ const Filters = ({ filters, className, currentTabId }) => {
     >
 
       {filters.map((item, index) => (
-        <button type="button" className="filters__item" key={item.id} onClick={item.action} ref={itemsRefArr[index]}>
+        <button type="button" className={cx('filters__item', {
+          'filters__item_active': windowSize.innerWidth <= 980 && currentTabId === index
+        })} key={item.id} onClick={item.action} ref={itemsRefArr[index]}>
           {item.name}
         </button>
       ))}
 
-      <div className="filters__bar-wrap">
-        <div className="filters__bar filters__bar_top" style={tabsBarActiveStyle} />
-        <div className="filters__bar filters__bar_bottom" style={tabsBarActiveStyle} />
-      </div>
+      {windowSize.innerWidth > 980 && (
+        <div className="filters__bar-wrap">
+          <div className="filters__bar filters__bar_top" style={tabsBarActiveStyle} />
+          <div className="filters__bar filters__bar_bottom" style={tabsBarActiveStyle} />
+        </div>
+      )}
     </div>
   );
 };

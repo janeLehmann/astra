@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
-import Typist from 'react-typist';
-import ReactCursorPosition from 'react-cursor-position';
-import { animated, useSpring } from 'react-spring';
-import cx from 'classnames';
-import PropTypes from 'prop-types';
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import React from 'react';
+import { YMaps, Map } from 'react-yandex-maps';
 
 import './Contacts.scss';
 
-const StartScreen = ({ magic }) => {
+const Contacts = () => {
   const mapState = { center: [60.001327, 30.296359], zoom: 11 };
 
   return (
@@ -33,8 +28,4 @@ const StartScreen = ({ magic }) => {
   );
 };
 
-StartScreen.propTypes = {
-  magic: PropTypes.bool.isRequired,
-};
-
-export default StartScreen;
+export default Contacts;

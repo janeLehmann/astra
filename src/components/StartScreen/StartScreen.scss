@@ -1,11 +1,13 @@
 .start-screen {
   background: #212121;
-  height: 100vh;
+  height: calc(100vh + 120px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: background 0.3s ease-in-out;
+  margin-top: -60px;
+  margin-bottom: -60px;
 
   &_light {
     background: white;

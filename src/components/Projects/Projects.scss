@@ -67,3 +67,37 @@
     color: var(--black);
   }
 }
+
+@media screen and (max-width: 980px) {
+  .projects {
+
+    &__item {
+      width: calc((100% - 30px) / 2);
+      margin-right: 30px;
+      margin-bottom: 30px;
+
+      &:nth-child(3n) {
+        margin-right: 30px;
+      }
+
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .projects {
+
+    &__item {
+      width: 100%;
+      margin-right: 0;
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+
+    }
+  }
+}

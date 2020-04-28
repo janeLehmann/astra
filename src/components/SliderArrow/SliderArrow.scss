@@ -1,0 +1,21 @@
+@import 'src/static/styles/mixins';
+
+.slider-arrow {
+  @include reset-button-styles();
+  width: 50px;
+  height: 70px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -35px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.66);
+
+  &_right {
+    right: 0;
+    left: auto;
+  }
+}

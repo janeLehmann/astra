@@ -62,6 +62,11 @@ const AnimatedSLetter = animated(IconSLetter);
 const Menu = ({ closeMenu }) => {
   const list = [
     {
+      id: 0,
+      title: 'Главная',
+      href: '/',
+    },
+    {
       id: 1,
       title: 'О нас',
       href: '/about',

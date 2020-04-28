@@ -873,6 +873,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@brainhubeu/react-carousel@^1.13.40":
+  version "1.13.40"
+  resolved "https://registry.yarnpkg.com/@brainhubeu/react-carousel/-/react-carousel-1.13.40.tgz#ad83dcf366b40ddba628a7aaa1e5ce35cd7cb831"
+  integrity sha512-L2FxB3H7xVkrzL95lKzIAOfdFa3LdAtWNpjvAaeTZV7MVPlSSAUejTvH2YDJRdDmIf3F3VOiqFnbnt8WxjCpyw==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -5642,6 +5647,11 @@ gatsby-graphiql-explorer@^0.3.1:
   integrity sha512-HTW0ST3zQGxOORCpmRKhy4lO48SwA9QHBfVBTm8zUWh5jgJOtDZa+O0CLxEieQhdb54lRt/PuZlozJCYFLEkYA==
   dependencies:
     "@babel/runtime" "^7.8.7"
+
+gatsby-image-background-slider@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-image-background-slider/-/gatsby-image-background-slider-0.0.2.tgz#d69a1359fd84e41ad492dd67542dbf3b3d461c69"
+  integrity sha512-skts8amtruqACXGlyU2BJYNJKv2eYa7UkTzLUw51G4TmIlQ0LpcenGHlwBGaLytYS7sEePGnr77/VUkRDlsxtg==
 
 gatsby-image@^2.3.1:
   version "2.3.1"
@@ -10534,13 +10544,6 @@ react-hot-loader@^4.12.20:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
     source-map "^0.7.3"
-
-react-id-swiper@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-3.0.0.tgz#110cc0d5a84c5f6e2c6247ca71f12f5783ebd020"
-  integrity sha512-80iJPfxPeuLpMxvAYIS9uw38MLngRoZ51RmL5ya5y/+Qw/H/ZxMBwIGfBRKU4REl+tJxARMHvESbwQUEdJgzqA==
-  dependencies:
-    object-assign "^4.1.1"
 
 react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.3"

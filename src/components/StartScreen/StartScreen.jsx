@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Typist from 'react-typist';
+import React from 'react';
 import ReactCursorPosition from 'react-cursor-position';
 import { animated, useSpring } from 'react-spring';
 import cx from 'classnames';

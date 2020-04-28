@@ -1,40 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Layout from '../components/Layout/Layout';
 import Contacts from '../components/Contacts/Contacts';
 import SEO from '../components/seo';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-import Menu from '../components/Menu/Menu';
 
-const IndexPage = () => {
-  const [magic, setMagic] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+const ContactsPage = () => {
   return (
-    <Layout>
+    <Layout isFullScreen >
       <SEO title="Home" />
-      <Header
-        setMagic={() => {
-          setMagic(prevState => !prevState);
-        }}
-        magic
-        setIsMenuOpen={() => {
-          setIsMenuOpen(true);
-        }}
-      />
-      <Contacts magic={magic} />
-
-      <Footer magic />
-      {isMenuOpen && (
-        <Menu
-          closeMenu={() => {
-            setIsMenuOpen(false);
-          }}
-        />
-      )}
+      <Contacts />
     </Layout>
   );
 };
 
-export default IndexPage;
+export default ContactsPage;

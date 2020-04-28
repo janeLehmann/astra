@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "gatsby"
 
 import Filters from '../Filters/Filters';
 
@@ -61,7 +62,7 @@ const Projects = ({ magic, list }) => {
         <div className="projects__list">
           {filteredList && filteredList.length && filteredList.map(item => (
             <div className="projects__item" key={item.id}>
-              <a href="/" className="projects__item-img-wrap" >
+              <Link to={item.slug} className="projects__item-img-wrap" >
                 <img
                   className="projects__item-img"
                   src={
@@ -74,10 +75,10 @@ const Projects = ({ magic, list }) => {
                   }
                   alt=""
                 />
-              </a>
+              </Link>
 
               <div className="projects__item-title-wrap">
-                <a href="/" className="projects__item-title">{item.title}</a>
+                <Link to={item.slug} className="projects__item-title">{item.title}</Link>
               </div>
             </div>
 
