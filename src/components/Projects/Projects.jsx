@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from "gatsby"
 
 import Filters from '../Filters/Filters';
+import CircleLoader from '../CircleLoader/CircleLoader';
 
 import './Projects.scss';
 
-const Projects = ({ magic, list }) => {
+const Projects = ({ list }) => {
   const [filters, setFilters] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [currentTabId, setCurrentTabId] = useState(0);
@@ -60,7 +61,7 @@ const Projects = ({ magic, list }) => {
         <Filters className="projects__filters" filters={filters} currentTabId={currentTabId} />
 
         <div className="projects__list">
-          {filteredList && filteredList.length && filteredList.map(item => (
+          {filteredList && filteredList.length ? filteredList.map(item => (
             <div className="projects__item" key={item.id}>
               <Link to={item.slug} className="projects__item-img-wrap" >
                 <img
@@ -81,8 +82,11 @@ const Projects = ({ magic, list }) => {
                 <Link to={item.slug} className="projects__item-title">{item.title}</Link>
               </div>
             </div>
-
-          ))}
+          )) : (
+            <div className="projects__loader">
+              <CircleLoader />
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -90,7 +94,15 @@ const Projects = ({ magic, list }) => {
 };
 
 Projects.propTypes = {
-  magic: PropTypes.bool.isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      featured_media: PropTypes.shape({
+        localFile: PropTypes.shape({
+          url: PropTypes.string,
+        })
+      })
+    })
+  ),
 };
 
 export default Projects;
