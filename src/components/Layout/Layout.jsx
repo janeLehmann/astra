@@ -12,7 +12,6 @@ import cx from 'classnames';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Menu from '../Menu/Menu';
-// import { useStaticQuery, graphql } from 'gatsby';
 
 import './Layout.scss';
 
@@ -21,7 +20,8 @@ const Layout = ({ children, magic, setMagic, isMagic, isFullScreen }) => {
 
   return (
     <div className={cx('layout', {
-      'layout_full-screen': isFullScreen
+      'layout_full-screen': isFullScreen,
+      'layout_is-menu-open': isMenuOpen
     })}>
       <Header
         magic={magic}

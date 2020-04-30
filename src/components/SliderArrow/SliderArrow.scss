@@ -13,9 +13,26 @@
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.66);
+  transition: background .3s ease-in-out;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
 
   &_right {
     right: 0;
     left: auto;
+  }
+
+  &__icon {
+    transform: rotate(180deg);
+
+    path {
+      stroke: var(--black);
+    }
+
+    .slider-arrow_right & {
+      transform: rotate(0);
+    }
   }
 }

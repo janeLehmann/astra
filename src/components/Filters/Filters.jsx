@@ -43,7 +43,7 @@ const Filters = ({ filters, className, currentTabId }) => {
         </button>
       ))}
 
-      {windowSize.innerWidth > 980 && (
+      {typeof window !== `undefined` && windowSize.innerWidth > 980 && (
         <div className="filters__bar-wrap">
           <div className="filters__bar filters__bar_top" style={tabsBarActiveStyle} />
           <div className="filters__bar filters__bar_bottom" style={tabsBarActiveStyle} />

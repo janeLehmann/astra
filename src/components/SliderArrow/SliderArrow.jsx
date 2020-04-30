@@ -2,6 +2,8 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
+import IconArrow from '../../static/assets/icon-arrow.svg';
+
 import './SliderArrow.scss';
 
 const SliderArrow = ({isRight, className}) => {
@@ -10,7 +12,7 @@ const SliderArrow = ({isRight, className}) => {
       [className] : className,
       'slider-arrow_right': isRight,
     })} type="button">
-      <i className="slider-arrow__icon"></i>
+      <IconArrow className="slider-arrow__icon" />
     </button>
   )
 };

@@ -30,7 +30,7 @@
 
   &__title {
     font-size: 28px;
-    @include medium();
+    @include regular();
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 20px;
@@ -53,14 +53,14 @@
 
   &__info-title {
     font-size: 18px;
-    @include regular();
+    @include light();
     color: var(--black);
     margin-right: 5px;
   }
 
   &__info-desc {
     font-size: 18px;
-    @include medium();
+    @include regular();
     color: var(--black);
   }
 
@@ -74,7 +74,7 @@
     padding-right: 20px;
     margin-left: auto;
     margin-right: auto;
-    @include regular();
+    @include light();
     line-height: 1.4;
     color: var(--black);
     font-size: 18px;

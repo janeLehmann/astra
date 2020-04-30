@@ -1,7 +1,8 @@
 @import 'src/static/styles/mixins';
 
 .menu {
-  position: absolute;
+  //position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -27,7 +28,7 @@
 
   &__item-link {
     text-decoration: none;
-    @include medium();
+    @include regular();
     color: var(--black);
     font-size: 25px;
     transition: color .3s ease-in-out;

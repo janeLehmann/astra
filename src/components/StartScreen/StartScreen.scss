@@ -1,3 +1,5 @@
+@import 'src/static/styles/mixins';
+
 .start-screen {
   background: #212121;
   height: calc(100vh + 120px);
@@ -24,7 +26,7 @@
 
   &__subtitle {
     color: white;
-    font-family: 'Roboto', sans-serif;
+    @include regular();
     text-transform: uppercase;
     font-size: 25px;
     transition: color 0.3s ease-in-out;
@@ -55,7 +57,7 @@
 
   &__text {
     color: white;
-    font-family: 'Roboto', sans-serif;
+    @include regular();
     text-transform: uppercase;
     font-size: 25px;
     transition: color 0.3s ease-in-out;
@@ -79,6 +81,30 @@
     left: 0;
     right: 0;
     bottom: 0;
+  }
+
+  &__line {
+    position: absolute;
+    top: -800px;
+    bottom: -800px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    left: 20%;
+    transition: transform .6s ease-in-out;
+
+
+
+    &_2 {
+      left: 40%;
+    }
+
+    &_3 {
+      left: 60%;
+    }
+
+    &_4 {
+      left: 80%;
+    }
   }
 }
 

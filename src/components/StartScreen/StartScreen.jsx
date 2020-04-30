@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 import './StartScreen.scss';
 
 const StartScreen = ({ magic }) => {
+  const isRendered = true;
+
   const animationProps1 = useSpring({
     from: { transform: 'translate3d(0, 50px, 0)', opacity: 0 },
     to: { transform: 'translate3d(0, 0, 0)', opacity: 1 },
@@ -26,6 +28,13 @@ const StartScreen = ({ magic }) => {
   const animationProps3 = useSpring({
     from: { transform: 'translate3d(0, 50px, 0)', opacity: 0 },
     to: { transform: 'translate3d(0, 0, 0)', opacity: 1 },
+    config: { duration: 600, mass: 0.6, tension: 200, friction: 60 },
+    delay: 1000,
+  });
+
+  const animatedLine = useSpring({
+    from: { transform: 'rotate(45deg)', opacity: 0 },
+    to: { transform: 'rotate(0deg)', opacity: 1 },
     config: { duration: 600, mass: 0.6, tension: 200, friction: 60 },
     delay: 1000,
   });
@@ -85,6 +94,11 @@ const StartScreen = ({ magic }) => {
           </animated.p>
           {/*</Typist>*/}
         </div>
+
+        <animated.div className="start-screen__line" style={animatedLine} />
+        <div className="start-screen__line start-screen__line_2" />
+        <div className="start-screen__line start-screen__line_3" />
+        <div className="start-screen__line start-screen__line_4" />
       </div>
 
       {/*<Cursor />*/}

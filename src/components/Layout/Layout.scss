@@ -159,6 +159,12 @@ button {
 
   &_full-screen {
     height: 100vh;
+    overflow: hidden;
+  }
+
+  &_is-menu-open {
+    height: 100vh;
+    overflow: hidden;
   }
 
   &__inner {

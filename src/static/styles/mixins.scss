@@ -1,19 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap');
+//@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap');
 
 // Fonts
+@mixin light() {
+  font-family: 'DIN Light', sans-serif;
+}
+
 @mixin regular() {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
+  font-family: 'DIN Regular', sans-serif;
 }
 
 @mixin medium() {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
+  font-family: 'DIN Medium', sans-serif;
 }
 
 @mixin bold() {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
+  font-family: 'DIN Bold', sans-serif;
 }
 
 @mixin reset-button-styles() {
@@ -35,4 +36,24 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.animated-line {
+  transform: rotate(45deg);
+
+  &-enter {
+    transform: rotate(45deg);
+  }
+  &-enter-active {
+    transform: rotate(0);
+  }
+  &-enter-done {
+    transform: rotate(0);
+  }
+  &-exit {
+    transform: rotate(0);
+  }
+  &-exit-active {
+    transform: rotate(0);
+  }
 }

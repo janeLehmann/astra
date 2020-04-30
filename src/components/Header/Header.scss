@@ -4,6 +4,10 @@
   position: relative;
   z-index: 50;
 
+  &_border {
+    border-bottom: 1px solid var(--black);
+  }
+
   &__container {
     height: 60px;
     display: flex;
@@ -14,10 +18,6 @@
     margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
-
-    .header_border & {
-      border-bottom: 2px solid var(--black);
-    }
   }
 
   &__left-part {

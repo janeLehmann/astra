@@ -66,21 +66,21 @@ const Menu = ({ closeMenu }) => {
       title: 'Главная',
       href: '/',
     },
-    {
-      id: 1,
-      title: 'О нас',
-      href: '/about',
-    },
+    // {
+    //   id: 1,
+    //   title: 'О нас',
+    //   href: '/about',
+    // },
     {
       id: 2,
       title: 'Проекты',
       href: '/projects',
     },
-    {
-      id: 3,
-      title: 'Блог',
-      href: '/blog',
-    },
+    // {
+    //   id: 3,
+    //   title: 'Блог',
+    //   href: '/blog',
+    // },
     {
       id: 4,
       title: 'Контакты',
@@ -88,7 +88,7 @@ const Menu = ({ closeMenu }) => {
     },
   ];
 
-  const windowSize = useWindowSize();
+ /* const windowSize = useWindowSize();
 
   let key = 600;
   if (windowSize.innerWidth > 600) {
@@ -109,9 +109,9 @@ const Menu = ({ closeMenu }) => {
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
     };
-    /* eslint-disable */
+    /!* eslint-disable *!/
   }, []);
-  /* eslint-enable */
+  /!* eslint-enable *!/
 
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2];
   const trans1 = (x, y) => `translate3d(${x / 15}px, ${y / 15}px, 0)`;
@@ -119,7 +119,7 @@ const Menu = ({ closeMenu }) => {
   const trans3 = (x, y) => `translate3d(${x / 18}px, ${y / 18}px, 0)`;
   const percent = x => `${x}%`;
 
-  /** Triangle 1 */
+  /!** Triangle 1 *!/
   const [springPropsTriangle1, setTriangle1] = useSpring(() => ({
     from: {
       xy: [1000, -300],
@@ -131,7 +131,7 @@ const Menu = ({ closeMenu }) => {
     config: { mass: 10, tension: 180, friction: 140 },
   }));
 
-  /** Triangle 2 */
+  /!** Triangle 2 *!/
   const [springPropsTriangle2, setTriangle2] = useSpring(() => ({
     from: {
       xy: [-1000, -300],
@@ -144,7 +144,7 @@ const Menu = ({ closeMenu }) => {
     config: { mass: 20, tension: 100, friction: 140 },
   }));
 
-  /** Letter S */
+  /!** Letter S *!/
   const [springPropsSLetter, setSLetter] = useSpring(() => ({
     from: {
       xy: [1000, 300],
@@ -154,7 +154,7 @@ const Menu = ({ closeMenu }) => {
     },
     to: { xy: [0, 0], opacity: 1 },
     config: { mass: 20, tension: 100, friction: 140 },
-  }));
+  }));*/
 
   return (
     <div className="menu">
@@ -173,33 +173,33 @@ const Menu = ({ closeMenu }) => {
         <span className="menu__close-line" />
       </button>
 
-      <AnimatedTriangle1
-        className="menu__shape-1"
-        style={{
-          transform: springPropsTriangle1.xy.interpolate(trans1),
-          left: springPropsTriangle1.left.interpolate(percent),
-          bottom: springPropsTriangle1.bottom.interpolate(percent),
-          opacity: springPropsTriangle1.opacity,
-        }}
-      />
-      <AnimatedTriangle2
-        className="menu__shape-2"
-        style={{
-          transform: springPropsTriangle2.xy.interpolate(trans3),
-          left: springPropsTriangle2.left.interpolate(percent),
-          top: springPropsTriangle2.top.interpolate(percent),
-          opacity: springPropsTriangle2.opacity,
-        }}
-      />
-      <AnimatedSLetter
-        className="menu__shape-3"
-        style={{
-          transform: springPropsSLetter.xy.interpolate(trans2),
-          right: springPropsSLetter.right.interpolate(percent),
-          bottom: springPropsSLetter.bottom.interpolate(percent),
-          opacity: springPropsSLetter.opacity,
-        }}
-      />
+      {/*<AnimatedTriangle1*/}
+      {/*  className="menu__shape-1"*/}
+      {/*  style={{*/}
+      {/*    transform: springPropsTriangle1.xy.interpolate(trans1),*/}
+      {/*    left: springPropsTriangle1.left.interpolate(percent),*/}
+      {/*    bottom: springPropsTriangle1.bottom.interpolate(percent),*/}
+      {/*    opacity: springPropsTriangle1.opacity,*/}
+      {/*  }}*/}
+      {/*/>*/}
+      {/*<AnimatedTriangle2*/}
+      {/*  className="menu__shape-2"*/}
+      {/*  style={{*/}
+      {/*    transform: springPropsTriangle2.xy.interpolate(trans3),*/}
+      {/*    left: springPropsTriangle2.left.interpolate(percent),*/}
+      {/*    top: springPropsTriangle2.top.interpolate(percent),*/}
+      {/*    opacity: springPropsTriangle2.opacity,*/}
+      {/*  }}*/}
+      {/*/>*/}
+      {/*<AnimatedSLetter*/}
+      {/*  className="menu__shape-3"*/}
+      {/*  style={{*/}
+      {/*    transform: springPropsSLetter.xy.interpolate(trans2),*/}
+      {/*    right: springPropsSLetter.right.interpolate(percent),*/}
+      {/*    bottom: springPropsSLetter.bottom.interpolate(percent),*/}
+      {/*    opacity: springPropsSLetter.opacity,*/}
+      {/*  }}*/}
+      {/*/>*/}
     </div>
   );
 };
