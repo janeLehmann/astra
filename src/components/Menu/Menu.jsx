@@ -66,11 +66,11 @@ const Menu = ({ closeMenu }) => {
       title: 'Главная',
       href: '/',
     },
-    // {
-    //   id: 1,
-    //   title: 'О нас',
-    //   href: '/about',
-    // },
+    {
+      id: 1,
+      title: 'О нас',
+      href: '/about',
+    },
     {
       id: 2,
       title: 'Проекты',
@@ -200,6 +200,22 @@ const Menu = ({ closeMenu }) => {
       {/*    opacity: springPropsSLetter.opacity,*/}
       {/*  }}*/}
       {/*/>*/}
+
+      <div className="menu__square-wrap">
+        {new Array(150).fill(1).map((_item, index) => (
+          /* eslint-disable react/no-array-index-key */
+          <div className="menu__square" key={index} />
+          /* eslint-enable react/no-array-index-key */
+        ))}
+      </div>
+
+      <div className="menu__square-wrap menu__square-wrap_bottom">
+        {new Array(300).fill(1).map((_item, index) => (
+          /* eslint-disable react/no-array-index-key */
+          <div className="menu__square" key={index} />
+          /* eslint-enable react/no-array-index-key */
+        ))}
+      </div>
     </div>
   );
 };

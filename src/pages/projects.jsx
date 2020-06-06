@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
+
 import Layout from '../components/Layout/Layout';
 import SEO from '../components/seo';
 import Projects from '../components/Projects/Projects';
@@ -22,25 +23,43 @@ export const query = graphql`
     allWordpressWpProjects {
       nodes {
         acf {
-          square
-          city
-          address
-          time
+          address_eng
+          address_rus
+          architector_eng
+          architector_rus
+          city_eng
+          city_rus
+          content_eng
+          content_rus
+          square_eng
+          square_rus
+          time_eng
+          time_rus
+          title_eng
+          title_rus
+          content_eng_projects {
+            ... on WordPressAcf_text {
+              text
+            }
+            ... on WordPressAcf_gallery {
+              gallery {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+          }
+          photo {
+            localFile {
+              publicURL
+            }
+          }
         }
+        slug
         categories {
           name
           slug
-          id
         }
-        featured_media {
-          localFile {
-            url
-            publicURL
-          }
-        }
-        id
-        title
-        slug
       }
     }
   }

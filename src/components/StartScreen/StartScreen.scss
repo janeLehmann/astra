@@ -6,32 +6,39 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  //align-items: center;
   transition: background 0.3s ease-in-out;
   margin-top: -60px;
   margin-bottom: -60px;
+  position: relative;
 
   &_light {
     background: white;
   }
 
   &__container {
+    max-width: 90%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    position: relative;
+    z-index: 20;
+    //align-items: center;
   }
 
   &__subtitle {
     color: white;
-    @include regular();
+    @include light();
     text-transform: uppercase;
-    font-size: 25px;
+    font-size: 40px;
     transition: color 0.3s ease-in-out;
-    text-align: center;
-    margin-bottom: 100px;
+    //text-align: center;
+    margin-bottom: 20px;
 
     .start-screen_light & {
       color: #212121;
@@ -39,29 +46,27 @@
   }
 
   &__logo {
-    margin-bottom: 100px;
-    width: 410px;
-
+    margin-bottom: 20px;
+    width: 300px;
+    fill: white;
     path {
       transition: fill 0.3s ease-in-out;
-
-      .start-screen_light & {
-        fill: #212121;
-      }
+      fill: inherit;
     }
   }
 
   &__content {
-    min-height: 25px;
+    //min-height: 25px;
   }
 
   &__text {
     color: white;
-    @include regular();
+    @include light();
     text-transform: uppercase;
-    font-size: 25px;
-    transition: color 0.3s ease-in-out;
-    text-align: center;
+    font-size: 23px;
+    //transition: color 0.3s ease-in-out;
+    //text-align: left;
+    margin-bottom: 20px;
 
     .start-screen_light & {
       color: #212121;
@@ -81,6 +86,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    background: rgba(255, 255, 255, 0.09);
   }
 
   &__line {
@@ -88,11 +94,9 @@
     top: -800px;
     bottom: -800px;
     width: 1px;
-    background: rgba(255, 255, 255, 0.2);
+    //background: rgba(255, 255, 255, 0.2);
     left: 20%;
     transition: transform .6s ease-in-out;
-
-
 
     &_2 {
       left: 40%;
@@ -106,9 +110,80 @@
       left: 80%;
     }
   }
+
+  &__column-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__column {
+    width: 19%;
+    position: absolute;
+    top: 4%;
+    height: 90%;
+    left: 0;
+    background: black;
+    will-change: transform;
+
+    &:first-child {
+      animation-duration: 2.5s;
+      animation-name: movement1;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+    }
+
+    &:nth-child(2) {
+      left: 20%;
+      animation-duration: 6s;
+      animation-name: movement1;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+      //animation-delay: 0.7s;
+    }
+
+    &:nth-child(3) {
+      left: 40%;
+      animation-duration: 3.5s;
+      animation-name: movement1;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in;
+    }
+
+    &:nth-child(4) {
+      left: 60%;
+      animation-duration: 2.5s;
+      animation-name: movement1;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+      //animation-delay: 0.7s;
+    }
+
+    &:nth-child(5) {
+      left: 80%;
+      width: 20%;
+      animation-duration: 5s;
+      animation-name: movement1;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+      //animation-delay: 1s;
+    }
+  }
 }
 
-@media screen and (max-width: 600px) {
+@keyframes movement1 {
+  from  {top: 6%;}
+  to   {top: 0;}
+}
+
+@media screen and (max-width: 900px) {
   .start-screen {
     &__logo {
       margin-bottom: 60px;
@@ -117,6 +192,75 @@
 
     &__text {
       font-size: 20px;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .start-screen {
+
+    &__container {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    &__logo {
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 250px;
+      margin-left: 0;
+    }
+
+    &__text {
+      font-size: 20px;
+      text-align: left;
+      line-height: 1.2;
+      text-transform: none;
+    }
+
+    &__column {
+      width: 32%;
+      position: absolute;
+      top: 4%;
+      height: 90%;
+      left: 0;
+      background: black;
+      will-change: transform;
+
+      &:first-child {
+        animation-duration: 2.5s;
+        animation-name: movement1;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+      }
+
+      &:nth-child(2) {
+        left: 33%;
+        animation-duration: 6s;
+        animation-name: movement1;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+        //animation-delay: 0.7s;
+      }
+
+      &:nth-child(3) {
+        left: 66%;
+        animation-duration: 3.5s;
+        animation-name: movement1;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in;
+      }
+
+      &:nth-child(4) {
+        display: none;
+      }
+
+      &:nth-child(5) {
+        display: none;
+      }
     }
   }
 }

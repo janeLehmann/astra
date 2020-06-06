@@ -57,6 +57,11 @@
     position: relative;
     height: 250px;
     margin-bottom: 20px;
+    transition: opacity .3s ease-in-out;
+
+    .projects__item:hover & {
+      opacity: 0.5;
+    }
   }
 
   &__item-img {
@@ -78,6 +83,14 @@
     text-transform: uppercase;
     font-size: 15px;
     color: var(--black);
+    display: inline;
+  }
+
+  &__item-rest {
+    @include light();
+    font-size: 15px;
+    color: var(--black);
+    display: inline;
   }
 }
 

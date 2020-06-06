@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import Layout from '../components/Layout/Layout';
 import StartScreen from '../components/StartScreen/StartScreen';
 import SEO from '../components/seo';
 
-const IndexPage = () => {
-  const [magic, setMagic] = useState(false);
+const IndexPage = ({lang}) => {
+  const [magic, setMagic] = useState('black');
 
   return (
     <Layout
       setMagic={() => {
-        setMagic(prevState => !prevState);
+        setMagic("#"+((1<<24)*Math.random()|0).toString(16));
       }}
       magic={magic}
       isMagic
@@ -18,9 +19,13 @@ const IndexPage = () => {
     >
       <SEO title="Home" />
 
-      <StartScreen magic={magic} />
+      <StartScreen magic={magic} lang={lang} />
     </Layout>
   );
 };
 
-export default IndexPage;
+const mapStateToProps = state => ({
+  lang: state.lang,
+});
+
+export default connect(mapStateToProps)(IndexPage);

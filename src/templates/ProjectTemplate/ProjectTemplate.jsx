@@ -4,16 +4,13 @@ import { graphql } from 'gatsby';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 
-import SliderArrow from '../../components/SliderArrow/SliderArrow'
+// import SliderArrow from '../../components/SliderArrow/SliderArrow';
 
 import './ProjectTemplate.scss';
 
 export default ({ data }) => {
   const project = data.allWordpressWpProjects.nodes[0];
-
-  console.log(
-    project && project.acf && project.acf.content_projects && project.acf.content_projects[1] && project.acf.content_projects[1].single_photo,
-  );
+  console.log('project', project);
   return (
     <Layout>
       <div className="project-item">
@@ -21,10 +18,11 @@ export default ({ data }) => {
           <img
             src={
               project &&
-              project.featured_media &&
-              project.featured_media.localFile &&
-              project.featured_media.localFile.publicURL
-                ? project.featured_media.localFile.publicURL
+              project.acf &&
+              project.acf.photo &&
+              project.acf.photo.localFile &&
+              project.acf.photo.localFile.publicURL
+                ? project.acf.photo.localFile.publicURL
                 : null
             }
             alt=""
@@ -32,33 +30,35 @@ export default ({ data }) => {
           />
 
           <div className="project-item__info">
-            <h1 className="project-item__title">{project.title}</h1>
+            <h1 className="project-item__title">
+              {project && project.acf && project.acf.title_rus}
+            </h1>
             <div className="project-item__list">
-              {project && project.acf && project.acf.square && (
+              {project && project.acf && project.acf.square_rus && (
                 <div className="project-item__info-item">
                   <div className="project-item__info-title">Площадь:</div>
-                  <div className="project-item__info-desc">{project.acf.square} m2</div>
+                  <div className="project-item__info-desc">{project.acf.square_rus} m2</div>
                 </div>
               )}
 
-              {project && project.acf && project.acf.city && (
+              {project && project.acf && project.acf.city_rus && (
                 <div className="project-item__info-item">
                   <div className="project-item__info-title">Город:</div>
-                  <div className="project-item__info-desc">{project.acf.city}</div>
+                  <div className="project-item__info-desc">{project.acf.city_rus}</div>
                 </div>
               )}
 
               {project && project.acf && project.acf.address && (
                 <div className="project-item__info-item">
                   <div className="project-item__info-title">Адрес:</div>
-                  <div className="project-item__info-desc">{project.acf.address}</div>
+                  <div className="project-item__info-desc">{project.acf.address_rus}</div>
                 </div>
               )}
 
-              {project && project.acf && project.acf.time && (
+              {project && project.acf && project.acf.time_rus && (
                 <div className="project-item__info-item">
                   <div className="project-item__info-title">Время создания проекта:</div>
-                  <div className="project-item__info-desc">{project.acf.time}</div>
+                  <div className="project-item__info-desc">{project.acf.time_rus}</div>
                 </div>
               )}
             </div>
@@ -66,7 +66,7 @@ export default ({ data }) => {
         </div>
 
         <div className="project-item__content">
-          {project &&
+          {/* {project &&
             project.acf &&
             project.acf.content_projects.map(item => (
               <>
@@ -96,7 +96,7 @@ export default ({ data }) => {
                     breakpoints={{
                       980: {
                         slidesPerPage: 1,
-                      }
+                      },
                     }}
                   >
                     {item.gallery.map(img => (
@@ -113,11 +113,15 @@ export default ({ data }) => {
 
                 {Object.prototype.hasOwnProperty.call(item, 'single_photo') && (
                   <div className="project-item__single-img-wrap">
-                    <img src={item.single_photo.localFile.publicURL} alt="" className="project-item__single-img"/>
+                    <img
+                      src={item.single_photo.localFile.publicURL}
+                      alt=""
+                      className="project-item__single-img"
+                    />
                   </div>
                 )}
               </>
-            ))}
+            ))}*/}
         </div>
 
         {/*<div dangerouslySetInnerHTML={{ __html: project && project.content }} />*/}
@@ -130,21 +134,21 @@ export const query = graphql`
     allWordpressWpProjects(filter: { slug: { eq: $slug } }) {
       nodes {
         acf {
-          square
-          time
-          city
-          address
-          content_projects {
-            ... on WordPressAcf_quote {
-              quote
-            }
-            ... on WordPressAcf_single_photo {
-              single_photo {
-                localFile {
-                  publicURL
-                }
-              }
-            }
+          address_eng
+          address_rus
+          architector_eng
+          architector_rus
+          city_eng
+          city_rus
+          content_eng
+          content_rus
+          square_eng
+          square_rus
+          time_eng
+          time_rus
+          title_eng
+          title_rus
+          content_eng_projects {
             ... on WordPressAcf_text {
               text
             }
@@ -156,21 +160,17 @@ export const query = graphql`
               }
             }
           }
+          photo {
+            localFile {
+              publicURL
+            }
+          }
         }
+        slug
         categories {
           name
           slug
-          id
         }
-        featured_media {
-          localFile {
-            url
-            publicURL
-          }
-        }
-        id
-        title
-        slug
       }
     }
   }

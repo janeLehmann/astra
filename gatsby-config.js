@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `ASTRA`,
+    description: ` `,
     author: `@gatsbyjs`,
   },
   plugins: [
@@ -91,6 +91,7 @@ module.exports = {
           "**/pages",
           "**/media",
           "**/projects",
+          "**/team",
         ],
         keepMediaSizes: false,
         // use a custom normalizer which is applied after the built-in ones.

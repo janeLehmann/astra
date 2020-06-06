@@ -19,10 +19,12 @@ const Layout = ({ children, magic, setMagic, isMagic, isFullScreen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className={cx('layout', {
-      'layout_full-screen': isFullScreen,
-      'layout_is-menu-open': isMenuOpen
-    })}>
+    <div
+      className={cx('layout', {
+        'layout_full-screen': isFullScreen,
+        'layout_is-menu-open': isMenuOpen,
+      })}
+    >
       <Header
         magic={magic}
         isMagic={isMagic}

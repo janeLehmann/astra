@@ -7,9 +7,8 @@ import { useWindowSize } from '../../helpers';
 
 import './Filters.scss';
 
-const Filters = ({ filters, className, currentTabId }) => {
+const Filters = ({ filters, className, currentTabId, lang }) => {
   const windowSize = useWindowSize();
-
   /**
    * Создаем массив из рефов для каждого из айтемов массива,
    * пришедшего из пропсов
@@ -34,12 +33,11 @@ const Filters = ({ filters, className, currentTabId }) => {
         [className]: className,
       })}
     >
-
       {filters.map((item, index) => (
         <button type="button" className={cx('filters__item', {
           'filters__item_active': windowSize.innerWidth <= 980 && currentTabId === index
         })} key={item.id} onClick={item.action} ref={itemsRefArr[index]}>
-          {item.name}
+          {lang === 'RU' ? item.name : item.id.replace('-', ' ')}
         </button>
       ))}
 
@@ -55,6 +53,7 @@ const Filters = ({ filters, className, currentTabId }) => {
 
 Filters.propTypes = {
   className: PropTypes.string,
+  lang: PropTypes.string,
   filters: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
@@ -66,6 +65,7 @@ Filters.propTypes = {
 
 Filters.defaultProps = {
   className: null,
+  lang: 'RU',
 };
 
 export default Filters;

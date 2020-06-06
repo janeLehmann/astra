@@ -65,6 +65,49 @@
     }
   }
 
+  &__right-part {
+    display: flex;
+  }
+
+  &__lang {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    margin-right: 20px;
+
+    .header_light & {
+      fill: #212121;
+    }
+  }
+
+  &__lang-item {
+    @include reset-button-styles();
+    @include regular();
+    color: white;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    transition: all .3s ease-in-out;
+
+    .header_light & {
+      fill: #212121;
+    }
+
+    &:last-child {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+
+    &:hover {
+      color: var(--red);
+    }
+
+    &_active {
+      border-color: white;
+    }
+  }
+
   &__burger {
     width: 40px;
     height: 20px;
