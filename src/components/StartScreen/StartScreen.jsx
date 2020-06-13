@@ -3,7 +3,6 @@ import { animated, useSprings, useSpring } from 'react-spring';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 // import Color from 'color';
-
 import IconLogo from '../../static/assets/logo.svg';
 
 import './StartScreen.scss';
@@ -11,7 +10,7 @@ import './StartScreen.scss';
 const AnimatedLogo = animated(IconLogo);
 
 const StartScreen = ({ magic, lang }) => {
-  const [firstString, setFirstString] = useState('Совесем скоро мы запустимся');
+  const [firstString, setFirstString] = useState('Архитектурное агентство');
 
   const items = [1, 2, 3, 4, 5];
   const trail = useSprings(
@@ -77,6 +76,7 @@ const StartScreen = ({ magic, lang }) => {
 
 StartScreen.propTypes = {
   magic: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
 export default StartScreen;

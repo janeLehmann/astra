@@ -1,32 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { connect } from 'react-redux';
 
 import IconLogo from '../../static/assets/logo.svg';
 import IconWand from '../../static/assets/magic-wand.svg';
 
 import './Header.scss';
 
-const Header = ({ setMagic, magic, setIsMenuOpen, isMagic, lang, dispatch }) => {
-  const ruClick = () => {
-    dispatch({ type: `SET_RU_LANG` });
-  };
-
-  const engClick = () => {
-    dispatch({ type: `SET_ENG_LANG` });
-  };
-
+const Header = ({ setMagic, isInnerPage, setIsMenuOpen, lang, ruClick, engClick }) => {
   return (
     <div
       className={cx('header', {
-        header_light: magic,
-        header_border: !isMagic,
+        header_light: isInnerPage,
+        header_border: isInnerPage,
       })}
     >
       <div className="header__container">
         <div className="header__left">
-          {isMagic ? (
+          {!isInnerPage ? (
             <button className="header__magic" onClick={setMagic}>
               <IconWand className="header__magic-icon" />
             </button>
@@ -70,23 +61,15 @@ const Header = ({ setMagic, magic, setIsMenuOpen, isMagic, lang, dispatch }) => 
 };
 
 Header.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   setMagic: PropTypes.func,
   setIsMenuOpen: PropTypes.func.isRequired,
-  magic: PropTypes.bool,
-  isMagic: PropTypes.bool,
-  lang: PropTypes.string,
+  isInnerPage: PropTypes.bool,
+  lang: PropTypes.string.isRequired,
 };
 
 Header.defaultProps = {
-  magic: true,
+  isInnerPage: false,
   setMagic: () => {},
-  isMagic: false,
-  lang: 'RU',
 };
 
-const mapStateToProps = state => ({
-  lang: state.lang,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

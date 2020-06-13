@@ -1,19 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
 
 import IconInsta from '../../static/assets/icon-insta.svg';
 import IconFb from '../../static/assets/icon-fb.svg';
 
 import './Footer.scss';
 
-const Footer = ({ magic }) => {
+const Footer = () => {
   return (
-    <div
-      className={cx('footer', {
-        footer_light: magic,
-      })}
-    >
+    <div className="footer">
       <div className="footer__container">
         <p className="footer__copyright">Copyright bla bla bla</p>
 
@@ -28,10 +22,6 @@ const Footer = ({ magic }) => {
       </div>
     </div>
   );
-};
-
-Footer.propTypes = {
-  magic: PropTypes.bool.isRequired,
 };
 
 export default Footer;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { connect } from 'react-redux';
 
 import Filters from '../Filters/Filters';
 import CircleLoader from '../CircleLoader/CircleLoader';
@@ -13,7 +12,7 @@ const Projects = ({ list, lang }) => {
   const [filteredList, setFilteredList] = useState([]);
   const [currentTabId, setCurrentTabId] = useState(0);
   const [currentTabIdText, setCurrentTabIdText] = useState('all');
-  // console.log('lang', lang);
+
   useEffect(() => {
     setFilters([
       {
@@ -56,7 +55,7 @@ const Projects = ({ list, lang }) => {
   return (
     <div className="projects">
       <div className="projects__container">
-        <h2 className="projects__title">Проекты</h2>
+        <h2 className="projects__title">{lang === 'RU' ? 'Проекты' : 'Projects'}</h2>
 
         <Filters className="projects__filters" filters={filters} currentTabId={currentTabId} lang={lang} />
 
@@ -82,13 +81,22 @@ const Projects = ({ list, lang }) => {
 
                 <div className="projects__item-title-wrap">
                   <Link to={item.slug} className="projects__item-title">
-                    {lang === 'RU' ? item.acf && item.acf.title_rus : item.acf && item.acf.title_eng}
+                    {lang === 'RU' && item.acf ? (
+                      <>
+                        {item.acf.title_rus}{' '}
+                      </>
+                      ) : (
+                      <>
+                        {item.acf.title_eng || item.acf.title_rus}{' '}
+                      </>
+                      )}
                   </Link>
-                  <div className="projects__item-rest">
-                    {' '}
-                    /  {lang === 'RU' ? item.acf && item.acf.square_rus : item.acf && item.acf.square_eng}{' m2 '}
-                    {lang === 'RU' ? item.acf.city_rus && `, ${item.acf.city_rus}` : item.acf.city_eng && `, ${item.acf.city_eng}`}
-                  </div>
+                  {item.acf && (item.acf.square_rus || item.acf.city_rus) && (
+                    <div className="projects__item-rest">
+                      /  {lang === 'RU' ? item.acf.square_rus : item.acf.square_eng || item.acf.square_rus}{' m2 '}
+                      {lang === 'RU' ?`, ${item.acf.city_rus}` :`, ${item.acf.city_eng || item.acf.city_rus}`}
+                    </div>
+                  )}
                 </div>
               </div>
             ))
@@ -123,8 +131,4 @@ Projects.propTypes = {
   ),
 };
 
-const mapStateToProps = state => ({
-  lang: state.lang,
-});
-
-export default connect(mapStateToProps)(Projects);
+export default Projects;

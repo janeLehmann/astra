@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 
 import Layout from '../components/Layout/Layout';
 import StartScreen from '../components/StartScreen/StartScreen';
 import SEO from '../components/seo';
+import { useStateWithLocalStorage } from '../helpers';
 
-const IndexPage = ({lang}) => {
+const IndexPage = () => {
   const [magic, setMagic] = useState('black');
+  const [lang, setLang] = useStateWithLocalStorage(
+    'astraLang'
+  );
 
   return (
     <Layout
@@ -14,8 +17,10 @@ const IndexPage = ({lang}) => {
         setMagic("#"+((1<<24)*Math.random()|0).toString(16));
       }}
       magic={magic}
-      isMagic
       isFullScreen
+      lang={lang}
+      engClick={() => setLang('ENG')}
+      ruClick={() => setLang('RU')}
     >
       <SEO title="Home" />
 
@@ -24,8 +29,4 @@ const IndexPage = ({lang}) => {
   );
 };
 
-const mapStateToProps = state => ({
-  lang: state.lang,
-});
-
-export default connect(mapStateToProps)(IndexPage);
+export default IndexPage;

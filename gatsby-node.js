@@ -13,8 +13,6 @@ exports.createPages = ({ graphql, actions }) => {
             architector_rus
             city_eng
             city_rus
-            content_eng
-            content_rus
             square_eng
             square_rus
             time_eng

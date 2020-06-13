@@ -15,7 +15,7 @@ import Menu from '../Menu/Menu';
 
 import './Layout.scss';
 
-const Layout = ({ children, magic, setMagic, isMagic, isFullScreen }) => {
+const Layout = ({ children, setMagic, isFullScreen, lang, engClick, ruClick, isInnerPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -26,16 +26,18 @@ const Layout = ({ children, magic, setMagic, isMagic, isFullScreen }) => {
       })}
     >
       <Header
-        magic={magic}
-        isMagic={isMagic}
         setMagic={setMagic}
         setIsMenuOpen={() => {
           setIsMenuOpen(true);
         }}
+        lang={lang}
+        engClick={engClick}
+        ruClick={ruClick}
+        isInnerPage={isInnerPage}
       />
       <main className="layout__inner">{children}</main>
 
-      <Footer magic={magic} />
+      <Footer />
       {isMenuOpen && (
         <Menu
           closeMenu={() => {
@@ -50,8 +52,7 @@ const Layout = ({ children, magic, setMagic, isMagic, isFullScreen }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   setMagic: PropTypes.func,
-  magic: PropTypes.bool,
-  isMagic: PropTypes.bool,
+  magic: PropTypes.string,
   isFullScreen: PropTypes.bool,
 };
 

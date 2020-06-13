@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function getSize() {
   if (typeof window !== `undefined`) {
@@ -49,4 +49,16 @@ export const disableSpaceEnter = input => {
 
 export const normalizePhone = input => {
   return input.replace(/[^0-9]/g, '');
+};
+
+export const useStateWithLocalStorage = localStorageKey => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(localStorageKey) || ''
+  );
+
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, value);
+  }, [value]);
+
+  return [value, setValue];
 };

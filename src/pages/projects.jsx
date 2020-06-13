@@ -1,17 +1,19 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-
+import { useStateWithLocalStorage } from '../helpers';
 import Layout from '../components/Layout/Layout';
 import SEO from '../components/seo';
 import Projects from '../components/Projects/Projects';
 
 const ProjectsPage = ({ data }) => {
+  const [lang, setLang] = useStateWithLocalStorage('astraLang');
+
   return (
-    <Layout>
+    <Layout isInnerPage lang={lang} engClick={() => setLang('ENG')} ruClick={() => setLang('RU')}>
       <SEO title="Home" />
 
-      <Projects list={data.allWordpressWpProjects.nodes} magic />
+      <Projects list={data.allWordpressWpProjects.nodes} magic lang={lang} />
     </Layout>
   );
 };
@@ -29,8 +31,6 @@ export const query = graphql`
           architector_rus
           city_eng
           city_rus
-          content_eng
-          content_rus
           square_eng
           square_rus
           time_eng

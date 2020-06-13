@@ -136,6 +136,22 @@
     height: 100%;
   }
 
+  &__single-img-container {
+    display: flex;
+
+    &_left {
+      justify-content: flex-start;
+    }
+
+    &_right {
+      justify-content: flex-end;
+    }
+
+    &_center {
+      justify-content: center;
+    }
+  }
+
   &__single-img-wrap {
     margin-bottom: 50px;
     max-width: 80%;
