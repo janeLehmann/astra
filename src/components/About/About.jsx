@@ -4,62 +4,67 @@ import './About.scss';
 import Carousel from '@brainhubeu/react-carousel';
 import SliderArrow from '../SliderArrow/SliderArrow';
 
-const About = ({main}) => {
+const About = ({main, team, lang}) => {
   return (
     <div className="about">
-     {/* <div className="about__content">
-        {main && main.wordpressPage &&
-        main.wordpressPage.acf &&
-        main.wordpressPage.acf.main_page.map(item => (
-          <>
+      {main.map(item => (
+        <div className="about__content" key={item.node.acf.about_content_rus}>
 
-            {item['__typename'] === 'WordPressAcf_content' && (
-              <div className="about__text" key={'WordPressAcf_content'}>
-                <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          <div className="about__photo-wrap">
+            <img src={item.node.acf.about_image && item.node.acf.about_image.localFile && item.node.acf.about_image.localFile.publicURL} alt="" className="about__photo"/>
+          </div>
+
+          <div className="about__text" dangerouslySetInnerHTML={{ __html: lang === 'RU'
+              ? item.node.acf.about_content_rus
+              : item.node.acf.about_content_eng || item.node.acf.about_content_rus }} />
+
+        </div>
+      ))}
+
+      <Carousel
+        centered
+        infinite
+        arrows
+        slidesPerPage={3}
+        className="about__gallery"
+        keepDirectionWhenDragging
+        arrowLeft={<SliderArrow name="angle-double-left" />}
+        arrowLeftDisabled={<SliderArrow name="angle-left" />}
+        arrowRight={<SliderArrow isRight name="angle-double-right" />}
+        arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
+        addArrowClickHandler
+        breakpoints={{
+          980: {
+            slidesPerPage: 1,
+          }
+        }}
+      >
+        {team.map(item => (
+          <div className="about__slider-item" key={item.acf.name_eng}>
+            <div className="about__slider-item-img-wrap">
+              <img
+                className="about__slider-item-img"
+                src={item.acf && item.acf.photo && item.acf.photo.localFile && item.acf.photo.localFile.publicURL}
+                alt=""
+              />
+            </div>
+
+            <div className="about__slider-item-desc-wrap">
+              <div className="about__slider-item-title">
+                {lang === 'RU'
+                  ? item.acf.name_rus
+                  : item.acf.name_eng || item.acf.name_rus}
               </div>
-            )}
 
-            {item['__typename'] === 'WordPressAcf_single_photo' && (
-              <div className="about__photo-wrap" key={'WordPressAcf_single_photo'}>
-                <img src={item.single_photo && item.single_photo.localFile && item.single_photo.localFile.publicURL} alt="" className="about__photo"/>
+              <div className="about__slider-item-desc">
+                {lang === 'RU'
+                  ? item.acf.desc_rus
+                  : item.acf.desc_eng || item.acf.desc_rus}
               </div>
-            )}
-
-
-            {Object.prototype.hasOwnProperty.call(item, 'team') && (
-              <Carousel
-                centered
-                infinite
-                arrows
-                slidesPerPage={2}
-                className="about__gallery"
-                keepDirectionWhenDragging
-                arrowLeft={<SliderArrow name="angle-double-left" />}
-                arrowLeftDisabled={<SliderArrow name="angle-left" />}
-                arrowRight={<SliderArrow isRight name="angle-double-right" />}
-                arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
-                addArrowClickHandler
-                breakpoints={{
-                  980: {
-                    slidesPerPage: 1,
-                  }
-                }}
-              >
-                {item.gallery.map(img => (
-                  <div className="about__slider-item">
-                    <img
-                      className="about__slider-item-img"
-                      src={img.localFile.publicURL}
-                      alt=""
-                    />
-                  </div>
-                ))}
-              </Carousel>
-            )}
-
-          </>
+            </div>
+          </div>
         ))}
-      </div>*/}
+      </Carousel>
     </div>
   )
 };

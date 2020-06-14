@@ -4,33 +4,59 @@ import Layout from '../components/Layout/Layout';
 import About from '../components/About/About';
 import SEO from '../components/seo';
 import { graphql } from 'gatsby';
+import { useStateWithLocalStorage } from '../helpers';
 
 const AboutPage = ({ data }) => {
+  const [lang, setLang] = useStateWithLocalStorage('astraLang');
+
   return (
-    <Layout>
+    <Layout isInnerPage lang={lang} engClick={() => setLang('ENG')} ruClick={() => setLang('RU')}>
       <SEO title="О нас" />
-      <About main={data} />
+      <About
+        main={
+          data &&
+          data.allWordpressAcfPages &&
+          data.allWordpressAcfPages.edges.filter(
+            item =>
+              item.node &&
+              (item.node.acf.about_content_eng ||
+                item.node.acf.about_content_rus ||
+                item.node.acf.about_image),
+          )
+        }
+        team={data && data.allWordpressAcfTeam && data.allWordpressAcfTeam.nodes}
+        lang={lang}
+      />
     </Layout>
   );
 };
 
 export default AboutPage;
 
-/*export const query = graphql`
+export const query = graphql`
   query {
-    wordpressPage {
-      acf {
-        main_page {
-          ... on WordPressAcf_content {
-            content
-          }
-          ... on WordPressAcf_team_list {
-            team {
-              post_title
+    allWordpressAcfTeam {
+      nodes {
+        acf {
+          desc_eng
+          desc_rus
+          name_eng
+          name_rus
+          photo {
+            localFile {
+              publicURL
             }
           }
-          ... on WordPressAcf_single_photo {
-            single_photo {
+        }
+      }
+    }
+    allWordpressAcfPages {
+      edges {
+        node {
+          acf {
+            about_content_eng
+            about_content_rus
+            about_image {
               localFile {
                 publicURL
               }
@@ -40,4 +66,4 @@ export default AboutPage;
       }
     }
   }
-`;*/
+`;
