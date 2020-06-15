@@ -11,7 +11,7 @@ const AboutPage = ({ data }) => {
 
   return (
     <Layout isInnerPage lang={lang} engClick={() => setLang('ENG')} ruClick={() => setLang('RU')}>
-      <SEO title="О нас" />
+      <SEO title={lang === 'RU' ? 'О нас' : 'About'} />
       <About
         main={
           data &&
