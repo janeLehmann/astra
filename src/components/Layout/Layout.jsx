@@ -37,7 +37,7 @@ const Layout = ({ children, setMagic, isFullScreen, lang, engClick, ruClick, isI
       />
       <main className="layout__inner">{children}</main>
 
-      <Footer />
+      <Footer isInnerPage={isInnerPage} />
       {isMenuOpen && (
         <Menu
           closeMenu={() => {

@@ -51,6 +51,10 @@
       transition: fill .3s ease-in-out;
       fill: white;
 
+      .footer_light & {
+        fill: #212121;
+      }
+
       .footer__socials-item:hover & {
         fill: #ff2d55;
       }

@@ -1,15 +1,18 @@
 import React from 'react';
+import cx from 'classnames';
 
 import IconInsta from '../../static/assets/icon-insta.svg';
 import IconFb from '../../static/assets/icon-fb.svg';
 
 import './Footer.scss';
 
-const Footer = () => {
+const Footer = ({isInnerPage}) => {
   return (
-    <div className="footer">
+    <div className={cx('footer', {
+      footer_light: isInnerPage,
+    })}>
       <div className="footer__container">
-        <p className="footer__copyright">Copyright bla bla bla</p>
+        <p className="footer__copyright" />
 
         <div className="footer__socials">
           <a href="/" className="footer__socials-item">
