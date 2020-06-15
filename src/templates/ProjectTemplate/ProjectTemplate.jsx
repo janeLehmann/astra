@@ -120,8 +120,8 @@ export default ({ data }) => {
           {lang !== 'RU' &&
             project &&
             project.acf &&
-            project.acf.content_eng_projects.map(item => (
-              <>
+            project.acf.content_eng_projects.map((item, index) => (
+              <div key={`key-index_${index}`}>
                 {Object.prototype.hasOwnProperty.call(item, 'text') && (
                   <div className="project-item__text">
                     <div dangerouslySetInnerHTML={{ __html: item.text }} />
@@ -152,7 +152,7 @@ export default ({ data }) => {
                     }}
                   >
                     {item.gallery.map(img => (
-                      <div className="project-item__slider-item">
+                      <div className="project-item__slider-item" key={img.localFile.publicURL}>
                         <img
                           className="project-item__slider-item-img"
                           src={img.localFile.publicURL}
@@ -176,14 +176,14 @@ export default ({ data }) => {
                     </div>
                   </div>
                 )}
-              </>
+              </div>
             ))}
 
           {lang === 'RU' &&
             project &&
             project.acf &&
-            project.acf.content_rus_projects.map(item => (
-              <>
+            project.acf.content_rus_projects.map((item, index) => (
+              <div key={`key-index_${index}`}>
                 {Object.prototype.hasOwnProperty.call(item, 'text') && (
                   <div className="project-item__text">
                     <div dangerouslySetInnerHTML={{ __html: item.text }} />
@@ -214,7 +214,7 @@ export default ({ data }) => {
                     }}
                   >
                     {item.gallery.map(img => (
-                      <div className="project-item__slider-item">
+                      <div className="project-item__slider-item" key={img.localFile.publicURL}>
                         <img
                           className="project-item__slider-item-img"
                           src={img.localFile.publicURL}
@@ -238,7 +238,7 @@ export default ({ data }) => {
                     </div>
                   </div>
                 )}
-              </>
+              </div>
             ))}
         </div>
       </div>

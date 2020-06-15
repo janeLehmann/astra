@@ -57,7 +57,7 @@ Layout.propTypes = {
 };
 
 Layout.defaultProps = {
-  magic: true,
+  magic: null,
   setMagic: () => {},
   isMagic: false,
   isFullScreen: false,

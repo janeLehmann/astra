@@ -7,12 +7,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: white;
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background: var(--black);
 
   &__list {
 
@@ -29,7 +29,7 @@
   &__item-link {
     text-decoration: none;
     @include regular();
-    color: var(--black);
+    color: white;
     font-size: 25px;
     transition: color .3s ease-in-out;
 
@@ -54,7 +54,7 @@
     left: 0;
     width: 100%;
     top: 13px;
-    background: var(--black);
+    background: white;
 
     &:first-child {
       transform: rotate(45deg);
