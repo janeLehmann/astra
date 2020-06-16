@@ -52,6 +52,24 @@ const Contacts = ({ lang, data }) => {
             </p>
           )}
 
+          {data[0].node && data[0].node.acf && data[0].node.acf && data[0].node.acf.settings_email && (
+            <p className="contacts__phone">
+              {lang === 'RU' ? 'Телефон:' : 'Phone:'} {'  '}
+              {data.map(item => (
+                <a
+                  href={`mailto:${item.node &&
+                  item.node.acf &&
+                  item.node.acf &&
+                  item.node.acf.settings_email}`}
+                  className="contacts__phone-itself"
+                  key={item.node.acf.settings_email}
+                >
+                  {item.node && item.node.acf && item.node.acf && item.node.acf.settings_email}
+                </a>
+              ))}
+            </p>
+          )}
+
           {data[0].node && data[0].node.acf && data[0].node.acf && data[0].node.acf.settings_telegram && (
             <p className="contacts__phone">
               Telegram: {'  '}

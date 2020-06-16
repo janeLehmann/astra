@@ -47,6 +47,7 @@ export const query = graphql`
           acf {
             settings_telegram
             settings_phone
+            settings_email
             settings_addresses {
               settings_address_eng
               settings_address_rus
