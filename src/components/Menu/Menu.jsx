@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
 
 import './Menu.scss';
 
-const Menu = ({ closeMenu }) => {
+const Menu = ({ closeMenu, lang }) => {
   const list = [
     {
       id: 0,
-      title: 'Главная',
+      title: lang === 'RU' ? 'Главная' : 'Home',
       href: '/',
     },
     {
       id: 1,
-      title: 'О нас',
+      title: lang === 'RU' ? 'О нас' : 'About',
       href: '/about',
     },
     {
       id: 2,
-      title: 'Проекты',
+      title: lang === 'RU' ? 'Проекты' : 'Projects',
       href: '/projects',
     },
     // {
@@ -27,22 +28,24 @@ const Menu = ({ closeMenu }) => {
     // },
     {
       id: 4,
-      title: 'Контакты',
+      title: lang === 'RU' ? 'Контакты' : 'Contacts',
       href: '/contacts',
     },
   ];
 
   return (
     <div className="menu">
-      <div className="menu__list">
-        {list.map(item => (
-          <div className="menu__item" key={item.id}>
-            <a href={item.href} className="menu__item-link">
-              {item.title}
-            </a>
-          </div>
-        ))}
-      </div>
+      {lang && (
+        <div className="menu__list">
+          {list.map(item => (
+            <div className="menu__item" key={item.id}>
+              <Link to={item.href} className="menu__item-link">
+                {item.title}
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
 
       <button className="menu__close" type="button" onClick={closeMenu}>
         <span className="menu__close-line" />
@@ -54,6 +57,7 @@ const Menu = ({ closeMenu }) => {
 
 Menu.propTypes = {
   closeMenu: PropTypes.func.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
 export default Menu;

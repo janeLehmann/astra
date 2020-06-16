@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import './About.scss';
 import Carousel from '@brainhubeu/react-carousel';
 import SliderArrow from '../SliderArrow/SliderArrow';
+
+import './About.scss';
 
 const About = ({main, team, lang}) => {
   return (
@@ -14,9 +16,11 @@ const About = ({main, team, lang}) => {
             <img src={item.node.acf.about_image && item.node.acf.about_image.localFile && item.node.acf.about_image.localFile.publicURL} alt="" className="about__photo"/>
           </div>
 
-          <div className="about__text" dangerouslySetInnerHTML={{ __html: lang === 'RU'
-              ? item.node.acf.about_content_rus
-              : item.node.acf.about_content_eng || item.node.acf.about_content_rus }} />
+          {lang && (
+            <div className="about__text" dangerouslySetInnerHTML={{ __html: lang === 'RU'
+                ? item.node.acf.about_content_rus
+                : item.node.acf.about_content_eng }} />
+          )}
 
         </div>
       ))}
@@ -51,15 +55,11 @@ const About = ({main, team, lang}) => {
 
             <div className="about__slider-item-desc-wrap">
               <div className="about__slider-item-title">
-                {lang === 'RU'
-                  ? item.acf.name_rus
-                  : item.acf.name_eng || item.acf.name_rus}
+                {lang === 'RU' ? item.acf.name_rus : item.acf.name_eng}
               </div>
 
               <div className="about__slider-item-desc">
-                {lang === 'RU'
-                  ? item.acf.desc_rus
-                  : item.acf.desc_eng || item.acf.desc_rus}
+                {lang === 'RU' ? item.acf.desc_rus : item.acf.desc_eng}
               </div>
             </div>
           </div>
@@ -67,6 +67,11 @@ const About = ({main, team, lang}) => {
       </Carousel>
     </div>
   )
+};
+
+About.propTypes = {
+  magic: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
 export default About;

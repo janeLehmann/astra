@@ -51,14 +51,14 @@ export const normalizePhone = input => {
   return input.replace(/[^0-9]/g, '');
 };
 
+export const isBrowser = () => typeof window !== 'undefined';
+
 export const useStateWithLocalStorage = localStorageKey => {
-  const [value, setValue] = React.useState(
-    localStorage.getItem(localStorageKey) || ''
-  );
+  const [value, setValue] = React.useState((isBrowser() && window.localStorage.getItem(localStorageKey)) || '');
 
   useEffect(() => {
-    localStorage.setItem(localStorageKey, value);
-  }, [value]);
+    window.localStorage.setItem(localStorageKey, value);
+  }, [value, localStorageKey]);
 
   return [value, setValue];
 };

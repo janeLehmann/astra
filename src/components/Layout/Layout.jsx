@@ -43,6 +43,7 @@ const Layout = ({ children, setMagic, isFullScreen, lang, engClick, ruClick, isI
           closeMenu={() => {
             setIsMenuOpen(false);
           }}
+          lang={lang}
         />
       )}
     </div>

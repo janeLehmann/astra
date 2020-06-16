@@ -46,7 +46,6 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }
   `).then(result => {
-    console.log(JSON.stringify(result, null, 4));
     result.data.allWordpressWpProjects.nodes.forEach(item => {
       createPage({
         path: item.slug,
