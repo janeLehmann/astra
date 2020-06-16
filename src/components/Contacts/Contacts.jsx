@@ -1,51 +1,48 @@
 import React from 'react';
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import { YMaps, Map, Placemark, Clusterer } from 'react-yandex-maps';
 import PropTypes from 'prop-types';
+
+import { useWindowSize } from '../../helpers';
 
 import './Contacts.scss';
 
 const Contacts = ({ lang, data }) => {
-  const latitude = data[0].node && data[0].node.acf && Number(data[0].node.acf.settings_lat);
-  const longitude = data[0].node && data[0].node.acf && Number(data[0].node.acf.settings_long);
-
-  const mapState = { center: [latitude, longitude], zoom: 16 };
+  const windowSize = useWindowSize();
+  const mapState = {  center: [58.494634, 34.625389], zoom: windowSize.innerWidth > 980 ? 5 : 4 };
+  const points =  data[0].node && data[0].node.acf.settings_addresses;
 
   return (
     <div className="contacts">
-      <div className="contacts__inner">
-        <YMaps>
-          <Map state={mapState} className="contacts__map">
-            <Placemark geometry={[latitude, longitude]} options={{
-              // iconLayout: 'default#image',
-              iconImageHref: '../../static/assets/placemark.svg',
-              iconImageSize: [60, 68],
-              iconImageOffset: [0, -30],
-            }} />
-          </Map>
-        </YMaps>
+      <div className="contacts__info">
+        <h1 className="contacts__title">{lang === 'RU' ? 'Контакты' : 'Contacts'}</h1>
 
-        <div className="contacts__info">
-          <h1 className="contacts__title">{lang === 'RU' ? 'Контакты' : 'Contacts'}</h1>
-
-          <div className="contacts__main">
-            <p className="contacts__address">
-              {lang === 'RU' ? 'Адрес:' : 'Address:'} {'  '}
-              {data.map(item => (
-                <span className="contacts__address-text" key={item.node.acf.settings_address_rus}>
-                  {lang === 'RU'
-                    ? item.node && item.node.acf && item.node.acf.settings_address_rus
-                    : item.node && item.node.acf && item.node.acf.settings_address_eng}
-                </span>
+        <div className="contacts__main">
+          {data[0].node && data[0].node.acf && data[0].node.acf && data[0].node.acf.settings_addresses.length >= 1 && (
+            <div className="contacts__address">
+              {lang === 'RU' ? 'Адреса:' : 'Addresses:'} {'  '}
+              {data.map((item, index) => (
+                <div className="contacts__address-text-wrap" key={`address-${index}`}>
+                  {item.node && item.node.acf && item.node.acf.settings_addresses.map((address, index) => (
+                    <div className="contacts__address-text" key={`address-line-${index}`}>
+                      - {lang === 'RU'
+                        ? address.settings_address_rus
+                        : address.settings_address_eng}
+                    </div>
+                  ))}
+                </div>
               ))}
-            </p>
+            </div>
+          )}
+
+          {data[0].node && data[0].node.acf && data[0].node.acf && data[0].node.acf.settings_phone && (
             <p className="contacts__phone">
               {lang === 'RU' ? 'Телефон:' : 'Phone:'} {'  '}
               {data.map(item => (
                 <a
                   href={`tel:${item.node &&
-                    item.node.acf &&
-                    item.node.acf &&
-                    item.node.acf.settings_phone}`}
+                  item.node.acf &&
+                  item.node.acf &&
+                  item.node.acf.settings_phone}`}
                   className="contacts__phone-itself"
                   key={item.node.acf.settings_phone}
                 >
@@ -53,8 +50,50 @@ const Contacts = ({ lang, data }) => {
                 </a>
               ))}
             </p>
-          </div>
+          )}
+
+          {data[0].node && data[0].node.acf && data[0].node.acf && data[0].node.acf.settings_telegram && (
+            <p className="contacts__phone">
+              Telegram: {'  '}
+              {data.map(item => (
+                <a
+                  href={`tg://msg_url?url=${item.node &&
+                  item.node.acf &&
+                  item.node.acf &&
+                  item.node.acf.settings_telegram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contacts__phone-itself"
+                  key={item.node.acf.settings_telegram}
+                >
+                  {item.node && item.node.acf && item.node.acf && item.node.acf.settings_telegram}
+                </a>
+              ))}
+            </p>
+          )}
         </div>
+      </div>
+
+      <div className="contacts__inner">
+        <YMaps>
+          <Map state={mapState} className="contacts__map">
+            <Clusterer
+              options={{
+                preset: 'islands#invertedVioletClusterIcons',
+                groupByCoordinates: false,
+              }}
+            >
+              {points.map((item, index) => (
+                <Placemark key={index} geometry={[item.settings_lat, item.settings_long]} options={{
+                  // iconLayout: 'default#image',
+                  iconImageHref: '../../static/assets/placemark.svg',
+                  iconImageSize: [60, 68],
+                  iconImageOffset: [0, -30],
+                }} />
+              ))}
+            </Clusterer>
+          </Map>
+        </YMaps>
       </div>
     </div>
   );

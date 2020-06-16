@@ -70,7 +70,6 @@ const About = ({main, team, lang}) => {
 };
 
 About.propTypes = {
-  magic: PropTypes.string.isRequired,
   lang: PropTypes.string.isRequired,
 };
 

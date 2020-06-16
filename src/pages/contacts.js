@@ -18,7 +18,21 @@ const ContactsPage = ({ data }) => {
       ruClick={() => setLang('RU')}
     >
       <SEO title={lang === 'RU' ? 'Контакты' : 'Contacts'} />
-      <Contacts lang={lang} data={data && data.allWordpressAcfPages && data.allWordpressAcfPages.edges.filter(item => item.node && item.node.acf && (item.node.acf.settings_address_eng || item.node.acf.settings_address_rus || item.node.acf.settings_long || item.node.acf.settings_lat || item.node.acf.settings_phone))} />
+      <Contacts
+        lang={lang}
+        data={
+          data &&
+          data.allWordpressAcfPages &&
+          data.allWordpressAcfPages.edges.filter(
+            item =>
+              item.node &&
+              item.node.acf &&
+              (item.node.acf.settings_telegram ||
+                item.node.acf.settings_phone ||
+                item.node.acf.settings_addresses),
+          )
+        }
+      />
     </Layout>
   );
 };
@@ -31,11 +45,14 @@ export const query = graphql`
       edges {
         node {
           acf {
-            settings_address_eng
-            settings_address_rus
-            settings_long
-            settings_lat
+            settings_telegram
             settings_phone
+            settings_addresses {
+              settings_address_eng
+              settings_address_rus
+              settings_lat
+              settings_long
+            }
           }
         }
       }

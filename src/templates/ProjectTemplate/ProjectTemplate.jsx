@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from '../../components/Layout/Layout';
 import { graphql } from 'gatsby';
-import Carousel from '@brainhubeu/react-carousel';
+import Carousel, { Dots } from '@brainhubeu/react-carousel';
 import { useStateWithLocalStorage } from '../../helpers';
 
 import '@brainhubeu/react-carousel/lib/style.css';
@@ -13,6 +13,7 @@ import './ProjectTemplate.scss';
 export default ({ data }) => {
   const project = data.allWordpressWpProjects.nodes[0];
   const [lang, setLang] = useStateWithLocalStorage('astraLang');
+  const [galleryValue, setGalleryValue] = useState(0);
 
   return (
     <Layout isInnerPage lang={lang} engClick={() => setLang('ENG')} ruClick={() => setLang('RU')}>
@@ -31,88 +32,86 @@ export default ({ data }) => {
             alt=""
             className="project-item__img"
           />
+        </div>
 
-          <div className="project-item__info">
-            <h1 className="project-item__title">
-              {project && project.acf && (
-                <>
+        <div className="project-item__info">
+          <h1 className="project-item__title">
+            {project && project.acf && (
+              <>
+                {lang === 'RU'
+                  ? project.acf.title_rus
+                  : project.acf.title_eng || project.acf.title_rus}
+              </>
+            )}
+          </h1>
+          <div className="project-item__list">
+            {project && project.acf && (project.acf.square_rus || project.acf.square_eng) && (
+              <div className="project-item__info-item">
+                <div className="project-item__info-title">
+                  {lang === 'RU' ? 'Площадь:' : 'Square:'}
+                </div>
+                <div className="project-item__info-desc">
                   {lang === 'RU'
-                    ? project.acf.title_rus
-                    : project.acf.title_eng || project.acf.title_rus}
-                </>
-              )}
-            </h1>
-            <div className="project-item__list">
-              {project && project.acf && (project.acf.square_rus || project.acf.square_eng) && (
-                <div className="project-item__info-item">
-                  <div className="project-item__info-title">
-                    {lang === 'RU' ? 'Площадь:' : 'Square:'}
-                  </div>
-                  <div className="project-item__info-desc">
-                    {lang === 'RU'
-                      ? project.acf.square_rus
-                      : project.acf.square_eng || project.acf.square_rus}{' '}
-                    m2
-                  </div>
+                    ? project.acf.square_rus
+                    : project.acf.square_eng || project.acf.square_rus}{' '}
+                  m2
                 </div>
-              )}
+              </div>
+            )}
 
-              {project && project.acf && (project.acf.city_rus || project.acf.city_eng) && (
-                <div className="project-item__info-item">
-                  <div className="project-item__info-title">
-                    {lang === 'RU' ? 'Город:' : 'City:'}
-                  </div>
-                  <div className="project-item__info-desc">
-                    {lang === 'RU'
-                      ? project.acf.city_rus
-                      : project.acf.city_eng || project.acf.city_rus}
-                  </div>
+            {project && project.acf && (project.acf.city_rus || project.acf.city_eng) && (
+              <div className="project-item__info-item">
+                <div className="project-item__info-title">{lang === 'RU' ? 'Город:' : 'City:'}</div>
+                <div className="project-item__info-desc">
+                  {lang === 'RU'
+                    ? project.acf.city_rus
+                    : project.acf.city_eng || project.acf.city_rus}
                 </div>
-              )}
+              </div>
+            )}
 
-              {project && project.acf && (project.acf.address_rus || project.acf.address_eng) && (
+            {project && project.acf && (project.acf.address_rus || project.acf.address_eng) && (
+              <div className="project-item__info-item">
+                <div className="project-item__info-title">
+                  {lang === 'RU' ? 'Адрес:' : 'Address:'}
+                </div>
+                <div className="project-item__info-desc">
+                  {' '}
+                  {lang === 'RU'
+                    ? project.acf.address_rus
+                    : project.acf.address_eng || project.acf.address_rus}
+                </div>
+              </div>
+            )}
+
+            {project &&
+              project.acf &&
+              (project.acf.architector_rus || project.acf.architector_eng) && (
                 <div className="project-item__info-item">
                   <div className="project-item__info-title">
-                    {lang === 'RU' ? 'Адрес:' : 'Address:'}
+                    {lang === 'RU' ? 'Архитектор:' : 'Architect:'}
                   </div>
                   <div className="project-item__info-desc">
                     {' '}
                     {lang === 'RU'
-                      ? project.acf.address_rus
-                      : project.acf.address_eng || project.acf.address_rus}
+                      ? project.acf.architector_rus
+                      : project.acf.architector_eng || project.acf.architector_rus}
                   </div>
                 </div>
               )}
 
-              {project &&
-                project.acf &&
-                (project.acf.architector_rus || project.acf.architector_eng) && (
-                  <div className="project-item__info-item">
-                    <div className="project-item__info-title">
-                      {lang === 'RU' ? 'Архитектор:' : 'Architect:'}
-                    </div>
-                    <div className="project-item__info-desc">
-                      {' '}
-                      {lang === 'RU'
-                        ? project.acf.architector_rus
-                        : project.acf.architector_eng || project.acf.architector_rus}
-                    </div>
-                  </div>
-                )}
-
-              {project && project.acf && (project.acf.time_rus || project.acf.time_eng) && (
-                <div className="project-item__info-item">
-                  <div className="project-item__info-title">
-                    {lang === 'RU' ? 'Время создания проекта:' : 'Creation time:'}
-                  </div>
-                  <div className="project-item__info-desc">
-                    {lang === 'RU'
-                      ? project.acf.time_rus
-                      : project.acf.time_eng || project.acf.time_rus}
-                  </div>
+            {project && project.acf && (project.acf.time_rus || project.acf.time_eng) && (
+              <div className="project-item__info-item">
+                <div className="project-item__info-title">
+                  {lang === 'RU' ? 'Время создания проекта:' : 'Creation time:'}
                 </div>
-              )}
-            </div>
+                <div className="project-item__info-desc">
+                  {lang === 'RU'
+                    ? project.acf.time_rus
+                    : project.acf.time_eng || project.acf.time_rus}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -161,6 +160,45 @@ export default ({ data }) => {
                       </div>
                     ))}
                   </Carousel>
+                )}
+
+                {Object.prototype.hasOwnProperty.call(item, 'WordPressAcf_gallery_with_thumbnails') && (
+                  <>
+                    <Carousel
+                      centered
+                      infinite
+                      arrows
+                      slidesPerPage={2}
+                      className="project-item__gallery 'asc'a;slc;'alsc';"
+                      keepDirectionWhenDragging
+                      arrowLeft={<SliderArrow name="angle-double-left" />}
+                      arrowLeftDisabled={<SliderArrow name="angle-left" />}
+                      arrowRight={<SliderArrow isRight name="angle-double-right" />}
+                      arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
+                      addArrowClickHandler
+                      value={galleryValue}
+                      onChange={() => setGalleryValue(0)}
+                      slides={item.gallery_with_thumbnails.map(img => (
+                      <img
+                        className="project-item__slider-item-img"
+                        src={img.localFile.publicURL}
+                        alt=""
+                        key={img.localFile.id}
+                      />
+                    ))}
+                    />
+
+                    <Dots
+                      thumbnails={item.gallery_with_thumbnails.map(img => (
+                      <img
+                        className="project-item__slider-item-img"
+                        src={img.localFile.publicURL}
+                        alt=""
+                        key={img.localFile.id}
+                      />
+                    ))} value={0} onChange={() => setGalleryValue(0)} number={item.gallery_with_thumbnails.length}
+                    />
+                  </>
                 )}
 
                 {Object.prototype.hasOwnProperty.call(item, 'single_photo') && (
@@ -284,6 +322,32 @@ export const query = graphql`
             ... on WordPressAcf_quote {
               quote
             }
+            ... on WordPressAcf_2_photos_in_row {
+              photo_1 {
+                localFile {
+                  publicURL
+                }
+                id
+              }
+              photo_2 {
+                localFile {
+                  publicURL
+                }
+                id
+              }
+            }
+            ... on WordPressAcf_gallery_on_top {
+              gallery_on_top
+            }
+            ... on WordPressAcf_gallery_with_thumbnails {
+              id
+              gallery_with_thumbnails {
+                localFile {
+                  publicURL
+                  id
+                }
+              }
+            }
           }
           photo {
             localFile {
@@ -304,6 +368,32 @@ export const query = graphql`
             }
             ... on WordPressAcf_quote {
               quote
+            }
+            ... on WordPressAcf_2_photos_in_row {
+              photo_1 {
+                localFile {
+                  publicURL
+                }
+                id
+              }
+              photo_2 {
+                localFile {
+                  publicURL
+                }
+                id
+              }
+            }
+            ... on WordPressAcf_gallery_on_top {
+              gallery_on_top
+            }
+            ... on WordPressAcf_gallery_with_thumbnails {
+              id
+              gallery_with_thumbnails {
+                localFile {
+                  publicURL
+                  id
+                }
+              }
             }
             ... on WordPressAcf_single_photo {
               single_photo {

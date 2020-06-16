@@ -9,7 +9,7 @@
   }
 
   &__container {
-    //height: 60px;
+    height: 60px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -18,10 +18,12 @@
     margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 20px;
     padding-bottom: 20px;
+    padding-top: 20px;
 
     .header_is-inner & {
+      height: auto;
+
       align-items: center;
     }
   }
