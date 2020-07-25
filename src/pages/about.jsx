@@ -13,17 +13,17 @@ const AboutPage = ({ data }) => {
     <Layout isInnerPage lang={lang} engClick={() => setLang('ENG')} ruClick={() => setLang('RU')}>
       <SEO title={lang === 'RU' ? 'О нас' : 'About'} />
       <About
-        main={
-          data &&
-          data.allWordpressAcfPages &&
-          data.allWordpressAcfPages.edges.filter(
-            item =>
-              item.node &&
-              (item.node.acf.about_content_eng ||
-                item.node.acf.about_content_rus ||
-                item.node.acf.about_image),
-          )
-        }
+        // main={
+        //   data &&
+        //   data.allWordpressAcfPages &&
+        //   data.allWordpressAcfPages.edges.filter(
+        //     item =>
+        //       item.node &&
+        //       (item.node.acf.about_content_eng ||
+        //         item.node.acf.about_content_rus ||
+        //         item.node.acf.about_image),
+        //   )
+        // }
         team={data && data.allWordpressAcfTeam && data.allWordpressAcfTeam.nodes}
         lang={lang}
       />
@@ -45,21 +45,6 @@ export const query = graphql`
           photo {
             localFile {
               publicURL
-            }
-          }
-        }
-      }
-    }
-    allWordpressAcfPages {
-      edges {
-        node {
-          acf {
-            about_content_eng
-            about_content_rus
-            about_image {
-              localFile {
-                publicURL
-              }
             }
           }
         }

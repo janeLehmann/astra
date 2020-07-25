@@ -2,13 +2,13 @@ import React from 'react';
 import { YMaps, Map, Placemark, Clusterer } from 'react-yandex-maps';
 import PropTypes from 'prop-types';
 
-import { useWindowSize } from '../../helpers';
+import { useWindowSize, isBrowser } from '../../helpers';
 
 import './Contacts.scss';
 
 const Contacts = ({ lang, data }) => {
   const windowSize = useWindowSize();
-  const mapState = {  center: [58.494634, 34.625389], zoom: windowSize.innerWidth > 980 ? 5 : 4 };
+  const mapState = {  center: [58.494634, 34.625389], zoom: isBrowser() && windowSize.innerWidth > 980 ? 5 : 4 };
   const points =  data[0].node && data[0].node.acf.settings_addresses;
 
   return (

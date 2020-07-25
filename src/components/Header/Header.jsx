@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import DesktopMenu from '../DesktopMenu/DesktopMenu';
 
-import { useWindowSize } from '../../helpers';
+import { useWindowSize, isBrowser } from '../../helpers';
 
 import IconLogo from '../../static/assets/logo.svg';
 import IconWand from '../../static/assets/magic-wand.svg';
@@ -34,7 +34,7 @@ const Header = ({ setMagic, isInnerPage, setIsMenuOpen, lang, ruClick, engClick 
           )}
         </div>
 
-        {windowSize.innerWidth < 600 ? (
+        {isBrowser() && windowSize.innerWidth < 600 ? (
           <div className="header__right-part">
             {lang && (
               <div className="header__lang">

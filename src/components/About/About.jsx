@@ -9,7 +9,7 @@ import './About.scss';
 const About = ({main, team, lang}) => {
   return (
     <div className="about">
-      {main.map(item => (
+      {/*{main.map(item => (
         <div className="about__content" key={item.node.acf.about_content_rus}>
 
           <div className="about__photo-wrap">
@@ -23,13 +23,27 @@ const About = ({main, team, lang}) => {
           )}
 
         </div>
-      ))}
+      ))}*/}{/*{main.map(item => (
+        <div className="about__content" key={item.node.acf.about_content_rus}>
+
+          <div className="about__photo-wrap">
+            <img src={item.node.acf.about_image && item.node.acf.about_image.localFile && item.node.acf.about_image.localFile.publicURL} alt="" className="about__photo"/>
+          </div>
+
+          {lang && (
+            <div className="about__text" dangerouslySetInnerHTML={{ __html: lang === 'RU'
+                ? item.node.acf.about_content_rus
+                : item.node.acf.about_content_eng }} />
+          )}
+
+        </div>
+      ))}*/}
 
       <Carousel
         centered
         infinite
         arrows
-        slidesPerPage={3}
+        slidesPerPage={4}
         className="about__gallery"
         keepDirectionWhenDragging
         arrowLeft={<SliderArrow name="angle-double-left" />}
@@ -39,6 +53,12 @@ const About = ({main, team, lang}) => {
         addArrowClickHandler
         breakpoints={{
           980: {
+            slidesPerPage: 3,
+          },
+          780: {
+            slidesPerPage: 2,
+          },
+          600: {
             slidesPerPage: 1,
           }
         }}

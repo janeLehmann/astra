@@ -24,10 +24,13 @@ const Projects = ({ list, lang }) => {
         },
       },
     ]);
+  }, []);
 
+  useEffect(() => {
     list.map((item, index) => {
-      setFilters(prevState =>
-        prevState.concat([
+      setFilters(prevState => {
+        console.log('!!!', item.categories[0] && item.categories[0].slug);
+        return prevState.concat([
           {
             id: item.categories[0].slug,
             name: item.categories[0].name,
@@ -36,8 +39,8 @@ const Projects = ({ list, lang }) => {
               setCurrentTabIdText(item.categories[0].slug);
             },
           },
-        ]),
-      );
+        ]);
+      });
     });
   }, [list]);
 
@@ -57,7 +60,12 @@ const Projects = ({ list, lang }) => {
       <div className="projects__container">
         <h2 className="projects__title">{lang === 'RU' ? 'Проекты' : 'Projects'}</h2>
 
-        <Filters className="projects__filters" filters={filters} currentTabId={currentTabId} lang={lang} />
+        <Filters
+          className="projects__filters"
+          filters={filters}
+          currentTabId={currentTabId}
+          lang={lang}
+        />
 
         <div className="projects__list">
           {filteredList && filteredList.length ? (
@@ -82,19 +90,21 @@ const Projects = ({ list, lang }) => {
                 <div className="projects__item-title-wrap">
                   <Link to={item.slug} className="projects__item-title">
                     {lang === 'RU' && item.acf ? (
-                      <>
-                        {item.acf.title_rus}{' '}
-                      </>
-                      ) : (
-                      <>
-                        {item.acf.title_eng || item.acf.title_rus}{' '}
-                      </>
-                      )}
+                      <>{item.acf.title_rus} </>
+                    ) : (
+                      <>{item.acf.title_eng || item.acf.title_rus} </>
+                    )}
                   </Link>
                   {item.acf && (item.acf.square_rus || item.acf.city_rus) && (
                     <div className="projects__item-rest">
-                      /  {lang === 'RU' ? item.acf.square_rus : item.acf.square_eng || item.acf.square_rus}{' m2 '}
-                      {lang === 'RU' ?`, ${item.acf.city_rus}` :`, ${item.acf.city_eng || item.acf.city_rus}`}
+                      /{' '}
+                      {lang === 'RU'
+                        ? item.acf.square_rus
+                        : item.acf.square_eng || item.acf.square_rus}
+                      {' m2 '}
+                      {lang === 'RU'
+                        ? `, ${item.acf.city_rus}`
+                        : `, ${item.acf.city_eng || item.acf.city_rus}`}
                     </div>
                   )}
                 </div>

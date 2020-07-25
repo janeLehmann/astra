@@ -62,7 +62,9 @@ export default ({ data }) => {
 
               {project && project.acf && (project.acf.city_rus || project.acf.city_eng) && (
                 <div className="project-item__info-item">
-                  <div className="project-item__info-title">{lang === 'RU' ? 'Город:' : 'City:'}</div>
+                  <div className="project-item__info-title">
+                    {lang === 'RU' ? 'Город:' : 'City:'}
+                  </div>
                   <div className="project-item__info-desc">
                     {lang === 'RU'
                       ? project.acf.city_rus
@@ -86,20 +88,20 @@ export default ({ data }) => {
               )}
 
               {project &&
-              project.acf &&
-              (project.acf.architector_rus || project.acf.architector_eng) && (
-                <div className="project-item__info-item">
-                  <div className="project-item__info-title">
-                    {lang === 'RU' ? 'Архитектор:' : 'Architect:'}
+                project.acf &&
+                (project.acf.architector_rus || project.acf.architector_eng) && (
+                  <div className="project-item__info-item">
+                    <div className="project-item__info-title">
+                      {lang === 'RU' ? 'Архитектор:' : 'Architect:'}
+                    </div>
+                    <div className="project-item__info-desc">
+                      {' '}
+                      {lang === 'RU'
+                        ? project.acf.architector_rus
+                        : project.acf.architector_eng || project.acf.architector_rus}
+                    </div>
                   </div>
-                  <div className="project-item__info-desc">
-                    {' '}
-                    {lang === 'RU'
-                      ? project.acf.architector_rus
-                      : project.acf.architector_eng || project.acf.architector_rus}
-                  </div>
-                </div>
-              )}
+                )}
 
               {project && project.acf && (project.acf.time_rus || project.acf.time_eng) && (
                 <div className="project-item__info-item">
@@ -361,108 +363,87 @@ export const query = graphql`
           architector_rus
           city_eng
           city_rus
+          content_eng_projects {
+            ... on WordPressAcf_2_photos_in_row {
+              id
+              photo_1 {
+                localFile {
+                  publicURL
+                }
+              }
+              photo_2 {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+            ... on WordPressAcf_gallery_with_thumbnails {
+              gallery_with_thumbnails {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+            ... on WordPressAcf_quote {
+              quote
+            }
+            ... on WordPressAcf_single_photo {
+              single_photo {
+                localFile {
+                  publicURL
+                }
+              }
+              align
+            }
+            ... on WordPressAcf_text {
+              text
+            }
+          }
+          content_rus_projects {
+            ... on WordPressAcf_2_photos_in_row {
+              id
+              photo_1 {
+                localFile {
+                  publicURL
+                }
+              }
+              photo_2 {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+            ... on WordPressAcf_gallery_with_thumbnails {
+              gallery_with_thumbnails {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+            ... on WordPressAcf_quote {
+              quote
+            }
+            ... on WordPressAcf_single_photo {
+              single_photo {
+                localFile {
+                  publicURL
+                }
+              }
+              align
+            }
+            ... on WordPressAcf_text {
+              text
+            }
+          }
           square_eng
           square_rus
           time_eng
           time_rus
           title_eng
           title_rus
-          content_eng_projects {
-            ... on WordPressAcf_text {
-              text
-            }
-            ... on WordPressAcf_gallery {
-              gallery {
-                localFile {
-                  publicURL
-                }
-              }
-            }
-            ... on WordPressAcf_single_photo {
-              single_photo {
-                localFile {
-                  publicURL
-                }
-              }
-              align
-            }
-            ... on WordPressAcf_quote {
-              quote
-            }
-            ... on WordPressAcf_2_photos_in_row {
-              photo_1 {
-                localFile {
-                  publicURL
-                }
-                id
-              }
-              photo_2 {
-                localFile {
-                  publicURL
-                }
-                id
-              }
-            }
-            ... on WordPressAcf_gallery_with_thumbnails {
-              id
-              gallery_with_thumbnails {
-                localFile {
-                  publicURL
-                  id
-                }
-              }
-            }
-          }
           photo {
             localFile {
               publicURL
-            }
-          }
-          content_rus_projects {
-            ... on WordPressAcf_gallery {
-              id
-              gallery {
-                localFile {
-                  publicURL
-                }
-              }
-            }
-            ... on WordPressAcf_text {
-              text
-            }
-            ... on WordPressAcf_quote {
-              quote
-            }
-            ... on WordPressAcf_2_photos_in_row {
-              photo_1 {
-                localFile {
-                  publicURL
-                }
-                id
-              }
-              photo_2 {
-                localFile {
-                  publicURL
-                }
-                id
-              }
-            }
-            ... on WordPressAcf_gallery_with_thumbnails {
-              id
-              gallery_with_thumbnails {
-                localFile {
-                  publicURL
-                  id
-                }
-              }
-            }
-            ... on WordPressAcf_single_photo {
-              single_photo {
-                localFile {
-                  publicURL
-                }
-              }
-              align
             }
           }
         }

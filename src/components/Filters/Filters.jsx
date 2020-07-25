@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect, useState, createRef} from 'react';
+import React, { useMemo, useEffect, useState, createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -34,9 +34,15 @@ const Filters = ({ filters, className, currentTabId, lang }) => {
       })}
     >
       {filters.map((item, index) => (
-        <button type="button" className={cx('filters__item', {
-          'filters__item_active': windowSize.innerWidth <= 980 && currentTabId === index
-        })} key={item.id} onClick={item.action} ref={itemsRefArr[index]}>
+        <button
+          type="button"
+          className={cx('filters__item', {
+            filters__item_active: windowSize.innerWidth <= 980 && currentTabId === index,
+          })}
+          key={item.id}
+          onClick={item.action}
+          ref={itemsRefArr[index]}
+        >
           {lang === 'RU' ? item.name : item.id.replace('-', ' ')}
         </button>
       ))}

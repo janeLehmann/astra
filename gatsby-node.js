@@ -13,24 +13,84 @@ exports.createPages = ({ graphql, actions }) => {
             architector_rus
             city_eng
             city_rus
+            content_eng_projects {
+              ... on WordPressAcf_2_photos_in_row {
+                id
+                photo_1 {
+                  localFile {
+                    publicURL
+                  }
+                }
+                photo_2 {
+                  localFile {
+                    publicURL
+                  }
+                }
+              }
+              ... on WordPressAcf_gallery_with_thumbnails {
+                gallery_with_thumbnails {
+                  localFile {
+                    publicURL
+                  }
+                }
+              }
+              ... on WordPressAcf_quote {
+                quote
+              }
+              ... on WordPressAcf_single_photo {
+                single_photo {
+                  localFile {
+                    publicURL
+                  }
+                }
+                align
+              }
+              ... on WordPressAcf_text {
+                text
+              }
+            }
+            content_rus_projects {
+              ... on WordPressAcf_2_photos_in_row {
+                id
+                photo_1 {
+                  localFile {
+                    publicURL
+                  }
+                }
+                photo_2 {
+                  localFile {
+                    publicURL
+                  }
+                }
+              }
+              ... on WordPressAcf_gallery_with_thumbnails {
+                gallery_with_thumbnails {
+                  localFile {
+                    publicURL
+                  }
+                }
+              }
+              ... on WordPressAcf_quote {
+                quote
+              }
+              ... on WordPressAcf_single_photo {
+                single_photo {
+                  localFile {
+                    publicURL
+                  }
+                }
+                align
+              }
+              ... on WordPressAcf_text {
+                text
+              }
+            }
             square_eng
             square_rus
             time_eng
             time_rus
             title_eng
             title_rus
-            content_eng_projects {
-              ... on WordPressAcf_text {
-                text
-              }
-              ... on WordPressAcf_gallery {
-                gallery {
-                  localFile {
-                    publicURL
-                  }
-                }
-              }
-            }
             photo {
               localFile {
                 publicURL
@@ -46,6 +106,7 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }
   `).then(result => {
+    console.log(result);
     result.data.allWordpressWpProjects.nodes.forEach(item => {
       createPage({
         path: item.slug,

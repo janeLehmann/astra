@@ -8,17 +8,17 @@ const Menu = ({ closeMenu, lang }) => {
   const list = [
     {
       id: 0,
-      title: lang === 'RU' ? 'Главная' : 'Home',
+      title: lang && lang === 'RU' ? 'Главная' : 'Home',
       href: '/',
     },
     {
       id: 1,
-      title: lang === 'RU' ? 'О нас' : 'About',
+      title: lang && lang === 'RU' ? 'О нас' : 'About',
       href: '/about',
     },
     {
       id: 2,
-      title: lang === 'RU' ? 'Проекты' : 'Projects',
+      title: lang && lang === 'RU' ? 'Проекты' : 'Projects',
       href: '/projects',
     },
     // {
@@ -28,7 +28,7 @@ const Menu = ({ closeMenu, lang }) => {
     // },
     {
       id: 4,
-      title: lang === 'RU' ? 'Контакты' : 'Contacts',
+      title: lang && lang === 'RU' ? 'Контакты' : 'Contacts',
       href: '/contacts',
     },
   ];
