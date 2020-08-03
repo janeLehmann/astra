@@ -78,3 +78,15 @@ export const removeDuplicates = (originalArray, prop) => {
   }
   return newArray;
 };
+
+export const getArraysSameItems = (longerArray, array2) => {
+  const same = [];
+
+  longerArray.forEach(el1 => {
+    if (array2.some(el2 => el2.categories[0].slug === el1.slug)) {
+      same.push(el1);
+    }
+  });
+
+  return same;
+};

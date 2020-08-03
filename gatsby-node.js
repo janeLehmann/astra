@@ -4,6 +4,12 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   return graphql(`
     {
+      allWordpressCategory {
+        nodes {
+          name
+          slug
+        }
+      }
       allWordpressWpProjects {
         nodes {
           acf {
@@ -13,6 +19,11 @@ exports.createPages = ({ graphql, actions }) => {
             architector_rus
             city_eng
             city_rus
+            main_slider {
+              localFile {
+                publicURL
+              }
+            }
             content_eng_projects {
               ... on WordPressAcf_2_photos_in_row {
                 id
@@ -22,13 +33,6 @@ exports.createPages = ({ graphql, actions }) => {
                   }
                 }
                 photo_2 {
-                  localFile {
-                    publicURL
-                  }
-                }
-              }
-              ... on WordPressAcf_gallery_with_thumbnails {
-                gallery_with_thumbnails {
                   localFile {
                     publicURL
                   }
@@ -58,13 +62,6 @@ exports.createPages = ({ graphql, actions }) => {
                   }
                 }
                 photo_2 {
-                  localFile {
-                    publicURL
-                  }
-                }
-              }
-              ... on WordPressAcf_gallery_with_thumbnails {
-                gallery_with_thumbnails {
                   localFile {
                     publicURL
                   }
@@ -106,7 +103,6 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }
   `).then(result => {
-    console.log(result);
     result.data.allWordpressWpProjects.nodes.forEach(item => {
       createPage({
         path: item.slug,

@@ -4,11 +4,11 @@ import { Link } from 'gatsby';
 
 import Filters from '../Filters/Filters';
 import CircleLoader from '../CircleLoader/CircleLoader';
-import { removeDuplicates } from '../../helpers';
+import { getArraysSameItems } from '../../helpers';
 
 import './Projects.scss';
 
-const Projects = ({ list, lang }) => {
+const Projects = ({ list, lang, categories }) => {
   const [filters, setFilters] = useState([
     {
       id: 'all',
@@ -22,27 +22,36 @@ const Projects = ({ list, lang }) => {
   const [filteredList, setFilteredList] = useState([]);
   const [currentTabId, setCurrentTabId] = useState(0);
   const [currentTabIdText, setCurrentTabIdText] = useState('all');
-  const [finalFilters, setFinalFilters] = useState(null);
-
 
   useEffect(() => {
-    list.map((item, index) => {
-      setFilters(prevState =>
-        prevState.concat({
-          id: item.categories[0].slug,
-          name: item.categories[0].name,
-          action: () => {
-            setCurrentTabId(index + 1);
-            setCurrentTabIdText(item.categories[0].slug);
-          },
-        }),
-      );
-    });
-  }, [list]);
+    if (categories && categories.length) {
+      getArraysSameItems(categories, list).map((item, index) => {
+        setFilters(
+          [
+            {
+              id: 'all',
+              name: 'Все',
+              action: () => {
+                setCurrentTabId(0);
+                setCurrentTabIdText('all');
+              },
+            },
+          ].concat({
+            id: item.slug,
+            name: item.name,
+            action: () => {
+              setCurrentTabId(index + 1);
+              setCurrentTabIdText(item.slug);
+            },
+          }),
+        );
+      });
+    }
+  }, [categories]);
 
-  useEffect(() => {
-    setFinalFilters(removeDuplicates(filters, 'id'));
-  }, [filters]);
+  // useEffect(() => {
+  //   setFinalFilters(removeDuplicates(filters, 'id'));
+  // }, [filters]);
 
   useEffect(() => {
     if (currentTabIdText !== 'all') {
@@ -52,10 +61,8 @@ const Projects = ({ list, lang }) => {
     }
 
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [currentTabIdText, list, finalFilters]);
+  }, [currentTabIdText, list, filters]);
   /* eslint-enable react-hooks/exhaustive-deps */
-
-  console.log(currentTabId);
 
   return (
     <div className="projects">
@@ -64,7 +71,7 @@ const Projects = ({ list, lang }) => {
 
         <Filters
           className="projects__filters"
-          filters={finalFilters}
+          filters={filters}
           currentTabId={currentTabId}
           lang={lang}
         />

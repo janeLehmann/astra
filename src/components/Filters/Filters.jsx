@@ -24,11 +24,6 @@ const Filters = ({ filters, className, currentTabId, lang }) => {
   /** Устанавливаем стили для активного таба */
   useEffect(() => {
     if (itemsRefArr && itemsRefArr.length) {
-      // console.log(
-      //   itemsRefArr[currentTabId] &&
-      //     itemsRefArr[currentTabId].current &&
-      //     itemsRefArr[currentTabId].current.clientWidth,
-      // );
       setTabsBarActiveStyle({
         width:
           itemsRefArr[currentTabId] &&
@@ -42,8 +37,6 @@ const Filters = ({ filters, className, currentTabId, lang }) => {
     }
   }, [currentTabId, itemsRefArr]);
 
-  console.log(itemsRefArr);
-
   return (
     <div
       className={cx('filters', {
@@ -56,7 +49,7 @@ const Filters = ({ filters, className, currentTabId, lang }) => {
           <button
             type="button"
             className={cx('filters__item', {
-              filters__item_active: windowSize.innerWidth <= 980 && currentTabId === index,
+              filters__item_active: typeof window !== `undefined` && windowSize.innerWidth <= 980 && currentTabId === index,
             })}
             key={item.id}
             onClick={item.action}

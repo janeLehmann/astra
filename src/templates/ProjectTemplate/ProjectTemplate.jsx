@@ -14,25 +14,51 @@ export default ({ data }) => {
   const project = data.allWordpressWpProjects.nodes[0];
   const [lang, setLang] = useStateWithLocalStorage('astraLang');
   const [galleryValue, setGalleryValue] = useState(0);
-  console.log(project);
   return (
     <Layout isInnerPage lang={lang} engClick={() => setLang('ENG')} ruClick={() => setLang('RU')}>
       <div className="project-item">
-        <div className="project-item__img-wrap">
-          <img
-            src={
-              project &&
-              project.acf &&
-              project.acf.photo &&
-              project.acf.photo.localFile &&
-              project.acf.photo.localFile.publicURL
-                ? project.acf.photo.localFile.publicURL
-                : null
-            }
-            alt=""
-            className="project-item__img"
-          />
-        </div>
+        {project && project.acf && project.acf.main_slider && (
+          <div className="project-item__gallery-with-thumbnails-wrap">
+            <Carousel
+              centered
+              infinite
+              arrows
+              slidesPerPage={1}
+              className="project-item__gallery-with-thumbnails"
+              keepDirectionWhenDragging
+              arrowLeft={<SliderArrow name="angle-double-left" />}
+              arrowLeftDisabled={<SliderArrow name="angle-left" />}
+              arrowRight={<SliderArrow isRight name="angle-double-right" />}
+              arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
+              addArrowClickHandler
+              value={galleryValue}
+              onChange={value => setGalleryValue(value)}
+            >
+              {project.acf.main_slider.map(img => (
+                <img
+                  className="project-item__slider-item-img"
+                  src={img.localFile.publicURL}
+                  alt=""
+                  key={img.localFile.id}
+                />
+              ))}
+            </Carousel>
+
+            <Dots
+              thumbnails={project.acf.main_slider.map(img => (
+                <img
+                  className="project-item__thumbnail-img"
+                  src={img.localFile.publicURL}
+                  alt=""
+                  key={img.localFile.id}
+                />
+              ))}
+              value={galleryValue}
+              onChange={value => setGalleryValue(value)}
+              number={project.acf.main_slider.length}
+            />
+          </div>
+        )}
 
         <div className="project-item__content">
           <div className="project-item__info">
@@ -133,80 +159,6 @@ export default ({ data }) => {
                   <div className="project-item__quote">{item.quote}</div>
                 )}
 
-                {Object.prototype.hasOwnProperty.call(item, 'gallery') && (
-                  <Carousel
-                    centered
-                    infinite
-                    arrows
-                    slidesPerPage={2}
-                    className="project-item__gallery"
-                    keepDirectionWhenDragging
-                    arrowLeft={<SliderArrow name="angle-double-left" />}
-                    arrowLeftDisabled={<SliderArrow name="angle-left" />}
-                    arrowRight={<SliderArrow isRight name="angle-double-right" />}
-                    arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
-                    addArrowClickHandler
-                    breakpoints={{
-                      980: {
-                        slidesPerPage: 1,
-                      },
-                    }}
-                  >
-                    {item.gallery.map(img => (
-                      <div className="project-item__slider-item" key={img.localFile.publicURL}>
-                        <img
-                          className="project-item__slider-item-img"
-                          src={img.localFile.publicURL}
-                          alt=""
-                        />
-                      </div>
-                    ))}
-                  </Carousel>
-                )}
-
-                {Object.prototype.hasOwnProperty.call(item, 'gallery_with_thumbnails') && (
-                  <>
-                    <Carousel
-                      centered
-                      infinite
-                      arrows
-                      slidesPerPage={1}
-                      className="project-item__gallery-with-thumbnails"
-                      keepDirectionWhenDragging
-                      arrowLeft={<SliderArrow name="angle-double-left" />}
-                      arrowLeftDisabled={<SliderArrow name="angle-left" />}
-                      arrowRight={<SliderArrow isRight name="angle-double-right" />}
-                      arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
-                      addArrowClickHandler
-                      value={galleryValue}
-                      onChange={value => setGalleryValue(value)}
-                    >
-                      {item.gallery_with_thumbnails.map(img => (
-                        <img
-                          className="project-item__slider-item-img"
-                          src={img.localFile.publicURL}
-                          alt=""
-                          key={img.localFile.id}
-                        />
-                      ))}
-                    </Carousel>
-
-                    <Dots
-                      thumbnails={item.gallery_with_thumbnails.map(img => (
-                        <img
-                          className="project-item__thumbnail-img"
-                          src={img.localFile.publicURL}
-                          alt=""
-                          key={img.localFile.id}
-                        />
-                      ))}
-                      value={galleryValue}
-                      onChange={value => setGalleryValue(value)}
-                      number={item.gallery_with_thumbnails.length}
-                    />
-                  </>
-                )}
-
                 {Object.prototype.hasOwnProperty.call(item, 'single_photo') && (
                   <div
                     className={`project-item__single-img-container project-item__single-img-container_${item.align}`}
@@ -236,80 +188,6 @@ export default ({ data }) => {
 
                 {Object.prototype.hasOwnProperty.call(item, 'quote') && (
                   <div className="project-item__quote">{item.quote}</div>
-                )}
-
-                {Object.prototype.hasOwnProperty.call(item, 'gallery') && (
-                  <Carousel
-                    centered
-                    infinite
-                    arrows
-                    slidesPerPage={2}
-                    className="project-item__gallery"
-                    keepDirectionWhenDragging
-                    arrowLeft={<SliderArrow name="angle-double-left" />}
-                    arrowLeftDisabled={<SliderArrow name="angle-left" />}
-                    arrowRight={<SliderArrow isRight name="angle-double-right" />}
-                    arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
-                    addArrowClickHandler
-                    breakpoints={{
-                      980: {
-                        slidesPerPage: 1,
-                      },
-                    }}
-                  >
-                    {item.gallery.map(img => (
-                      <div className="project-item__slider-item" key={img.localFile.publicURL}>
-                        <img
-                          className="project-item__slider-item-img"
-                          src={img.localFile.publicURL}
-                          alt=""
-                        />
-                      </div>
-                    ))}
-                  </Carousel>
-                )}
-
-                {Object.prototype.hasOwnProperty.call(item, 'gallery_with_thumbnails') && (
-                  <div className="project-item__gallery-with-thumbnails-wrap">
-                    <Carousel
-                      centered
-                      infinite
-                      arrows
-                      slidesPerPage={1}
-                      className="project-item__gallery-with-thumbnails"
-                      keepDirectionWhenDragging
-                      arrowLeft={<SliderArrow name="angle-double-left" />}
-                      arrowLeftDisabled={<SliderArrow name="angle-left" />}
-                      arrowRight={<SliderArrow isRight name="angle-double-right" />}
-                      arrowRightDisabled={<SliderArrow isRight name="angle-right" />}
-                      addArrowClickHandler
-                      value={galleryValue}
-                      onChange={value => setGalleryValue(value)}
-                    >
-                      {item.gallery_with_thumbnails.map(img => (
-                        <img
-                          className="project-item__slider-item-img"
-                          src={img.localFile.publicURL}
-                          alt=""
-                          key={img.localFile.id}
-                        />
-                      ))}
-                    </Carousel>
-
-                    <Dots
-                      thumbnails={item.gallery_with_thumbnails.map(img => (
-                        <img
-                          className="project-item__thumbnail-img"
-                          src={img.localFile.publicURL}
-                          alt=""
-                          key={img.localFile.id}
-                        />
-                      ))}
-                      value={galleryValue}
-                      onChange={value => setGalleryValue(value)}
-                      number={item.gallery_with_thumbnails.length}
-                    />
-                  </div>
                 )}
 
                 {Object.prototype.hasOwnProperty.call(item, 'single_photo') && (
@@ -356,7 +234,88 @@ export const query = graphql`
   query($slug: String!) {
     allWordpressWpProjects(filter: { slug: { eq: $slug } }) {
       nodes {
-        acf
+        acf {
+          address_eng
+          address_rus
+          architector_eng
+          architector_rus
+          city_eng
+          city_rus
+          main_slider {
+            localFile {
+              publicURL
+            }
+          }
+          content_eng_projects {
+            ... on WordPressAcf_2_photos_in_row {
+              id
+              photo_1 {
+                localFile {
+                  publicURL
+                }
+              }
+              photo_2 {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+            ... on WordPressAcf_quote {
+              quote
+            }
+            ... on WordPressAcf_single_photo {
+              single_photo {
+                localFile {
+                  publicURL
+                }
+              }
+              align
+            }
+            ... on WordPressAcf_text {
+              text
+            }
+          }
+          content_rus_projects {
+            ... on WordPressAcf_2_photos_in_row {
+              id
+              photo_1 {
+                localFile {
+                  publicURL
+                }
+              }
+              photo_2 {
+                localFile {
+                  publicURL
+                }
+              }
+            }
+            ... on WordPressAcf_quote {
+              quote
+            }
+            ... on WordPressAcf_single_photo {
+              single_photo {
+                localFile {
+                  publicURL
+                }
+              }
+              align
+            }
+            ... on WordPressAcf_text {
+              text
+            }
+          }
+          square_eng
+          square_rus
+          time_eng
+          time_rus
+          title_eng
+          title_rus
+          photo {
+            localFile {
+              publicURL
+            }
+          }
+        }
         slug
         categories {
           name
