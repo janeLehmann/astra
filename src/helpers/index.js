@@ -54,11 +54,27 @@ export const normalizePhone = input => {
 export const isBrowser = () => typeof window !== 'undefined';
 
 export const useStateWithLocalStorage = localStorageKey => {
-  const [value, setValue] = React.useState((isBrowser() && window.localStorage.getItem(localStorageKey)) || '');
+  const [value, setValue] = React.useState(
+    (isBrowser() && window.localStorage.getItem(localStorageKey)) || '',
+  );
 
   useEffect(() => {
     window.localStorage.setItem(localStorageKey, value);
   }, [value, localStorageKey]);
 
   return [value, setValue];
+};
+
+export const removeDuplicates = (originalArray, prop) => {
+  const newArray = [];
+  const lookupObject = {};
+
+  for (let i in originalArray) {
+    lookupObject[originalArray[i][prop]] = originalArray[i];
+  }
+
+  for (let i in lookupObject) {
+    newArray.push(lookupObject[i]);
+  }
+  return newArray;
 };

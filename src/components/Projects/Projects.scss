@@ -17,6 +17,7 @@
     @include light();
     color: var(--black);
     margin-bottom: 50px;
+    text-transform: uppercase;
   }
 
   &__filters {

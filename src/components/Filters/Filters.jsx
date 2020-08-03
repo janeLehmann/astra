@@ -13,19 +13,36 @@ const Filters = ({ filters, className, currentTabId, lang }) => {
    * Создаем массив из рефов для каждого из айтемов массива,
    * пришедшего из пропсов
    * */
-  const itemsRefArr = useMemo(() => filters.map(() => createRef()), [filters]);
+  const itemsRefArr = useMemo(() => {
+    if (filters && Array.isArray(filters) && filters.length >= 1) {
+      return filters.map(() => createRef());
+    }
+  }, [filters]);
 
   const [tabsBarActiveStyle, setTabsBarActiveStyle] = useState(null);
 
   /** Устанавливаем стили для активного таба */
   useEffect(() => {
     if (itemsRefArr && itemsRefArr.length) {
+      // console.log(
+      //   itemsRefArr[currentTabId] &&
+      //     itemsRefArr[currentTabId].current &&
+      //     itemsRefArr[currentTabId].current.clientWidth,
+      // );
       setTabsBarActiveStyle({
-        width: itemsRefArr[currentTabId].current.clientWidth,
-        left: itemsRefArr[currentTabId].current.offsetLeft,
+        width:
+          itemsRefArr[currentTabId] &&
+          itemsRefArr[currentTabId].current &&
+          itemsRefArr[currentTabId].current.clientWidth,
+        left:
+          itemsRefArr[currentTabId] &&
+          itemsRefArr[currentTabId].current &&
+          itemsRefArr[currentTabId].current.offsetLeft,
       });
     }
   }, [currentTabId, itemsRefArr]);
+
+  console.log(itemsRefArr);
 
   return (
     <div
@@ -33,19 +50,21 @@ const Filters = ({ filters, className, currentTabId, lang }) => {
         [className]: className,
       })}
     >
-      {filters.map((item, index) => (
-        <button
-          type="button"
-          className={cx('filters__item', {
-            filters__item_active: windowSize.innerWidth <= 980 && currentTabId === index,
-          })}
-          key={item.id}
-          onClick={item.action}
-          ref={itemsRefArr[index]}
-        >
-          {lang === 'RU' ? item.name : item.id.replace('-', ' ')}
-        </button>
-      ))}
+      {filters &&
+        filters.length >= 1 &&
+        filters.map((item, index) => (
+          <button
+            type="button"
+            className={cx('filters__item', {
+              filters__item_active: windowSize.innerWidth <= 980 && currentTabId === index,
+            })}
+            key={item.id}
+            onClick={item.action}
+            ref={itemsRefArr[index]}
+          >
+            {lang === 'RU' ? item.name : item.id.replace('-', ' ')}
+          </button>
+        ))}
 
       {typeof window !== `undefined` && windowSize.innerWidth > 980 && (
         <div className="filters__bar-wrap">

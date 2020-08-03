@@ -4,45 +4,45 @@ import { Link } from 'gatsby';
 
 import Filters from '../Filters/Filters';
 import CircleLoader from '../CircleLoader/CircleLoader';
+import { removeDuplicates } from '../../helpers';
 
 import './Projects.scss';
 
 const Projects = ({ list, lang }) => {
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState([
+    {
+      id: 'all',
+      name: 'Все',
+      action: () => {
+        setCurrentTabId(0);
+        setCurrentTabIdText('all');
+      },
+    },
+  ]);
   const [filteredList, setFilteredList] = useState([]);
   const [currentTabId, setCurrentTabId] = useState(0);
   const [currentTabIdText, setCurrentTabIdText] = useState('all');
+  const [finalFilters, setFinalFilters] = useState(null);
 
-  useEffect(() => {
-    setFilters([
-      {
-        id: 'all',
-        name: 'Все',
-        action: () => {
-          setCurrentTabId(0);
-          setCurrentTabIdText('all');
-        },
-      },
-    ]);
-  }, []);
 
   useEffect(() => {
     list.map((item, index) => {
-      setFilters(prevState => {
-        console.log('!!!', item.categories[0] && item.categories[0].slug);
-        return prevState.concat([
-          {
-            id: item.categories[0].slug,
-            name: item.categories[0].name,
-            action: () => {
-              setCurrentTabId(index + 1);
-              setCurrentTabIdText(item.categories[0].slug);
-            },
+      setFilters(prevState =>
+        prevState.concat({
+          id: item.categories[0].slug,
+          name: item.categories[0].name,
+          action: () => {
+            setCurrentTabId(index + 1);
+            setCurrentTabIdText(item.categories[0].slug);
           },
-        ]);
-      });
+        }),
+      );
     });
   }, [list]);
+
+  useEffect(() => {
+    setFinalFilters(removeDuplicates(filters, 'id'));
+  }, [filters]);
 
   useEffect(() => {
     if (currentTabIdText !== 'all') {
@@ -52,8 +52,10 @@ const Projects = ({ list, lang }) => {
     }
 
     /* eslint-disable react-hooks/exhaustive-deps */
-  }, [currentTabIdText, list, filters]);
+  }, [currentTabIdText, list, finalFilters]);
   /* eslint-enable react-hooks/exhaustive-deps */
+
+  console.log(currentTabId);
 
   return (
     <div className="projects">
@@ -62,7 +64,7 @@ const Projects = ({ list, lang }) => {
 
         <Filters
           className="projects__filters"
-          filters={filters}
+          filters={finalFilters}
           currentTabId={currentTabId}
           lang={lang}
         />
@@ -70,8 +72,8 @@ const Projects = ({ list, lang }) => {
         <div className="projects__list">
           {filteredList && filteredList.length ? (
             filteredList.map(item => (
-              <div className="projects__item" key={item.id}>
-                <Link to={item.slug} className="projects__item-img-wrap">
+              <div className="projects__item" key={item.slug}>
+                <Link to={`/${item.slug}`} className="projects__item-img-wrap">
                   <img
                     className="projects__item-img"
                     src={
@@ -88,7 +90,7 @@ const Projects = ({ list, lang }) => {
                 </Link>
 
                 <div className="projects__item-title-wrap">
-                  <Link to={item.slug} className="projects__item-title">
+                  <Link to={`/${item.slug}`} className="projects__item-title">
                     {lang === 'RU' && item.acf ? (
                       <>{item.acf.title_rus} </>
                     ) : (
